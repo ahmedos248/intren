@@ -1,0 +1,106 @@
+{
+    "newArrivals": [
+        {
+            "id": 1,
+            "img": "/images/elegant.png",
+            "title": "Elegant Evening Dress",
+            "desc": "Perfect for special occasions"
+        },
+        {
+            "id": 2,
+            "img": "/images/casual.png",
+            "title": "Casual Weekend Wear",
+            "desc": "Comfortable and stylish for everyday"
+        },
+        {
+            "id": 3,
+            "img": "/images/dress.png",
+            "title": "Summer Breeze Dress",
+            "desc": "Light and airy for warm days"
+        },
+        {
+            "id": 4,
+            "img": "/images/suit.png",
+            "title": "Sophisticated Suit",
+            "desc": "Sharp and refined for formal wear"
+        }
+    ],
+    "bestSellers": [
+        {
+            "id": 1,
+            "img": "/images/handbag.png",
+            "title": "Classic Leather Handbag",
+            "desc": "A must-have accessory for any wardrobe"
+        },
+        {
+            "id": 2,
+            "img": "/images/trench.png",
+            "title": "Timeless Trench Coat",
+            "desc": "An iconic piece for all seasons"
+        },
+        {
+            "id": 3,
+            "img": "/images/perfume.png",
+            "title": "Signature Scent Perfume",
+            "desc": "A captivating fragrance that leaves a lasting impression"
+        },
+        {
+            "id": 4,
+            "img": "/images/denim.png",
+            "title": "Essential Denim Jeans",
+            "desc": "The perfect fit for any occasion"
+        }
+    ],
+    "collections": [
+        {
+            "id": 1,
+            "img": "/images/summer.png",
+            "title": "Summer Essentials",
+            "desc": "Stay cool and chic with our summer collection"
+        },
+        {
+            "id": 2,
+            "img": "/images/work.png",
+            "title": "Work From Home Style",
+            "desc": "Comfort and style for your home office"
+        },
+        {
+            "id": 3,
+            "img": "/images/date.png",
+            "title": "Date Night Outfits",
+            "desc": "Dress to impress on your special night"
+        },
+        {
+            "id": 4,
+            "img": "/images/travel.png",
+            "title": "Travel Ready",
+            "desc": "Pack smart and stylish for your next adventure"
+        }
+    ],
+    "blog": [
+        {
+            "id": 1,
+            "img": "/images/eco.png",
+            "title": "The Ultimate Guide to Sustainable Fashion",
+            "desc": "Learn how to make eco-friendly fashion choices"
+        },
+        {
+            "id": 2,
+            "img": "/images/trends.png",
+            "title": "Top 5 Fashion Trends This Season",
+            "desc": "Stay ahead of the curve with the latest trends"
+        },
+        {
+            "id": 3,
+            "img": "/images/capsule.png",
+            "title": "How to Style a Capsule Wardrobe",
+            "desc": "Create a versatile wardrobe with essential pieces"
+        },
+        {
+            "id": 4,
+            "img": "/images/accessories.png",
+            "title": "Accessorize Like a Pro",
+            "desc": "Elevate your look with the perfect accessories"
+        }
+    ]
+}
