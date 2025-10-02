@@ -1,7 +1,8 @@
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Navbar from "./components/Navbar";
-import ProductPage from "./pages/ProductPage";
+import Blog from "./pages/Blog.jsx";
+import Products from "./pages/Products.jsx";
 
 
 function App() {
@@ -11,12 +12,11 @@ function App() {
       <div className="max-w-6xl mx-auto px-6 py-10">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/shop" element={<Products />} />
         </Routes>
       </div>
-      <ProductPage/>
     </div>
-    
-  
   );
 }
 

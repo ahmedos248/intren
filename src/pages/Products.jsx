@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function App() {
+const Products = () => {
   const product = {
     name: "Elegant Red Evening Gown",
     price: 299.99,
@@ -44,19 +44,19 @@ function App() {
       <div className="max-w-6xl bg-white rounded shadow px-8 py-8">
 
         {/* الصور */}
-        
+
         <div style={{ display: "flex", gap: "20px" }}>
-        <img
-          src="./dress.jpg"
-          alt="Illustration"
-          style={{ width: "30%", borderRadius: "10px" ,height:"500px"}}
-        />
-        <img
-          src="./dress2.jpg"
-          alt="Product"
-          style={{ width: "30%", borderRadius: "10px",height:"500px" }}
-        />
-      </div>
+          <img
+            src="./dress.jpg"
+            alt="Illustration"
+            style={{ width: "30%", borderRadius: "10px", height: "500px" }}
+          />
+          <img
+            src="./dress2.jpg"
+            alt="Product"
+            style={{ width: "30%", borderRadius: "10px", height: "500px" }}
+          />
+        </div>
 
 
 
@@ -65,7 +65,7 @@ function App() {
         <div className="mt-8">
           <h2 className="text-2xl font-bold">{product.name}</h2>
           <p className="text-gray-600 mt-3">
-            This stunning red evening gown is perfect for any special occasion. Made from luxurious silk, 
+            This stunning red evening gown is perfect for any special occasion. Made from luxurious silk,
             it features a flattering silhouette and intricate detailing. Available in sizes XS to XL.
           </p>
 
@@ -109,8 +109,8 @@ function App() {
               <div className="text-sm text-gray-500">{product.totalReviews} reviews</div>
             </div>
             <div className="flex-1 space-y-2">
-                
-            
+
+
             </div>
           </div>
 
@@ -133,4 +133,4 @@ function App() {
   );
 }
 
-export default App;
+export default Products;

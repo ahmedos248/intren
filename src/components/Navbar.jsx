@@ -1,15 +1,12 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import NavMenu from "./NavMenu";
-
 export default function Navbar() {
     const [search, setSearch] = useState("");
     const [menuOpen, setMenuOpen] = useState(false);
-
     return (
         <header className="w-full bg-white shadow-sm">
             <div className="max-w-8xl mx-auto flex items-center justify-between px-6 py-3">
-
                 <div className="flex items-center space-x-10">
                     <div className="flex items-center space-x-4">
                         <i class="fa-solid fa-cube transform scale-x-[-1]"></i>
@@ -25,8 +22,6 @@ export default function Navbar() {
                         <Link to="/contact">Contact</Link>
                     </nav>
                 </div>
-
-
                 <div className="flex items-center space-x-3">
                     <div className="relative text-2xl md:me-5">
                         <i className="fas fa-search absolute left-3 top-4 text-[#757575]"></i>
@@ -62,7 +57,6 @@ export default function Navbar() {
                 </div>
             </div>
             <NavMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
-
         </header>
     );
 }
