@@ -2,7 +2,7 @@ const categories = ["All", "Fashion", "Lifestyle", "Trends", "Reviews"];
 
 export default function CategoryFilter({ selected, onFilterChange }) {
     return (
-        <div className="flex gap-3 mb-6 justify-start">
+        <div className="flex flex-wrap gap-3 mb-6 justify-start">
             {categories.map((cat) => (
                 <button
                     key={cat}
