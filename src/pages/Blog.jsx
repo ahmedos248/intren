@@ -1,22 +1,21 @@
-import { useEffect, useState } from "react";
 import { usePagination } from "../hooks/usePagination";
+import { useFetch } from "../hooks/useFetch";
+import { useFilter } from "../hooks/useFilter";
+import { useEffect } from "react";
+import CategoryFilter from "../components/CategoryFilter";
 
 const Blog = ({ endpoint = "blog" }) => {
-    const [items, setItems] = useState([]);
-    const itemsPerPage = usePagination();
-    const [currentPage, setCurrentPage] = useState(1);
-    const totalPages = Math.ceil(items.length / itemsPerPage);
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    const visibleItems = items.slice(startIndex, startIndex + itemsPerPage);
-
+    const items = useFetch(`http://localhost:5000/${endpoint}`);
+    const { category, setCategory, filteredItems } = useFilter(items);
+    const { currentPage, setCurrentPage, totalPages, visibleItems } = usePagination(filteredItems, 8);
     useEffect(() => {
-        fetch(`http://localhost:5000/${endpoint}`)
-            .then(res => res.json())
-            .then(setItems);
-    }, [endpoint]);
+        setCurrentPage(1);
+    }, [category, setCurrentPage]);
+
     return (
         <div>
             <h1 className="text-2xl font-bold mb-4">Blog</h1>
+            <CategoryFilter selected={category} onFilterChange={setCategory} />
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
                 {visibleItems.map((item) => (
                     <div key={item.id}>
@@ -60,9 +59,7 @@ const Blog = ({ endpoint = "blog" }) => {
                     <i class="fa-solid fa-angle-right"></i>
                 </button>
             </div>
-
         </div>
     );
 };
-
 export default Blog;
