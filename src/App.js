@@ -4,6 +4,7 @@ import Blog from "./pages/Blog.jsx";
 import Header from "./components/common/header/Header.jsx";
 import Product from "./pages/Product.jsx"
 import About from "./pages/About.jsx";
+import WishlistPage from "./pages/WishlistPage.jsx";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/blog" element={<Blog />} />
           <Route path="/shop" element={<Product />} />
           <Route path="/about" element={<About />} />
+          <Route path="/wishlist" element={<WishlistPage />} />
         </Routes>
       </div>
     </div>

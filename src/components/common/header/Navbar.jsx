@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 const Navbar = ({
     searchOpen,
     setSearchOpen,
@@ -31,12 +33,12 @@ const Navbar = ({
                 />
             </div>
             <div className="md:flex hidden items-center space-x-3 text-2xl text-[#141414]">
-                <button className="p-3 py-2.5 rounded-xl bg-[#F2F2F2]">
+                <Link to="/wishlist" className="p-3 py-2.5 rounded-xl bg-[#F2F2F2]">
                     <i className="fa-regular fa-heart"></i>
-                </button>
-                <button className="p-3 rounded-xl bg-[#F2F2F2]">
+                </Link>
+                <Link to="/cart" className="p-3 rounded-xl bg-[#F2F2F2]">
                     <img src="images/cart.svg" alt="" className="w-7 h-7" />
-                </button>
+                </Link>
             </div>
             <div className="lg:hidden">
                 <button

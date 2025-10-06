@@ -1,10 +1,10 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Product = () => {
   const [cart, setCart] = useState([]);
   const [wishlist, setWishlist] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [isWishlistOpen, setIsWishlistOpen] = useState(false);
 
   const product = {
     name: "Elegant Red Evening Gown",
@@ -114,12 +114,12 @@ const Product = () => {
             >
               Add to Wishlist
             </button>
-            <button
+            <Link
+              to="/wishlist"
               className="border px-3 py-2 rounded text-sm"
-              onClick={() => setIsWishlistOpen(true)}
             >
               Open Wishlist ({wishlist.length})
-            </button>
+            </Link>
           </div>
         </div>
 
@@ -147,7 +147,7 @@ const Product = () => {
         </div>
       </div>
 
-      {isCartOpen && (
+      {/* {isCartOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center">
           <div className="bg-white rounded-lg shadow-lg p-6 w-96 relative">
             <button
@@ -171,9 +171,9 @@ const Product = () => {
             )}
           </div>
         </div>
-      )}
+      )} */}
 
-      {isWishlistOpen && (
+      {/* {isWishlistOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center">
           <div className="bg-white rounded-lg shadow-lg p-6 w-96 relative">
             <button
@@ -197,7 +197,7 @@ const Product = () => {
             )}
           </div>
         </div>
-      )}
+      )} */}
     </div>
   );
 }
