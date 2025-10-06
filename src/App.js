@@ -2,8 +2,8 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Blog from "./pages/Blog.jsx";
 import Header from "./components/common/header/Header.jsx";
-import Product from "./components/Product.jsx"
-import About from "./components/About";
+import Product from "./pages/Product.jsx"
+import About from "./pages/About.jsx";
 
 function App() {
   return (
@@ -13,10 +13,10 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/shop" element={<Product />} />
+          <Route path="/about" element={<About />} />
         </Routes>
       </div>
-      <Product/>
-      <About/>
     </div>
   );
 }

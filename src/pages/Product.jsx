@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function App() {
+const Product = () => {
   const [cart, setCart] = useState([]);
   const [wishlist, setWishlist] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -202,4 +202,4 @@ function App() {
   );
 }
 
-export default App;
+export default Product;

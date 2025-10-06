@@ -29,6 +29,7 @@ export default function Header() {
                     <Link to="/sale">Sale</Link>
                     <Link to="/blog">Blog</Link>
                     <Link to="/contact">Contact</Link>
+                    <Link to="/about">About</Link>
                 </nav>
                 <Navbar
                     searchOpen={searchOpen}
