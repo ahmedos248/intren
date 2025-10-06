@@ -82,25 +82,57 @@
             "id": 1,
             "img": "/images/eco.png",
             "title": "The Ultimate Guide to Sustainable Fashion",
-            "desc": "Learn how to make eco-friendly fashion choices"
+            "desc": "Learn how to make eco-friendly fashion choices",
+            "category": "Fashion"
         },
         {
             "id": 2,
             "img": "/images/trends.png",
             "title": "Top 5 Fashion Trends This Season",
-            "desc": "Stay ahead of the curve with the latest trends"
+            "desc": "Stay ahead of the curve with the latest trends",
+            "category": "Trends"
         },
         {
             "id": 3,
             "img": "/images/capsule.png",
             "title": "How to Style a Capsule Wardrobe",
-            "desc": "Create a versatile wardrobe with essential pieces"
+            "desc": "Create a versatile wardrobe with essential pieces",
+            "category": "Lifestyle"
         },
         {
             "id": 4,
             "img": "/images/accessories.png",
             "title": "Accessorize Like a Pro",
-            "desc": "Elevate your look with the perfect accessories"
+            "desc": "Elevate your look with the perfect accessories",
+            "category": "Reviews"
+        },
+        {
+            "id": 5,
+            "img": "/images/wardrobe.png",
+            "title": "The Ultimate Guide to Sustainable Fashion",
+            "desc": "Discover how to make eco-friendly choices in your wardrobe.",
+            "category": "Fashion"
+        },
+        {
+            "id": 6,
+            "img": "/images/trendy.png",
+            "title": "Top 5 Fashion Trends for 2024",
+            "desc": "Stay ahead of the curve with the latest fashion trends.",
+            "category": "Trends"
+        },
+        {
+            "id": 7,
+            "img": "/images/versatile.png",
+            "title": "How to Style a Capsule Wardrobe",
+            "desc": "Simplify your style with a versatile capsule wardrobe.",
+            "category": "Lifestyle"
+        },
+        {
+            "id": 8,
+            "img": "/images/look.png",
+            "title": "The Best Accessories for Every Occasion",
+            "desc": "Complete your look with the perfect accessories.",
+            "category": "Reviews"
         }
     ]
 }
