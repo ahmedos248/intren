@@ -1,15 +1,17 @@
 import { Link } from "react-router-dom"
+import { setSearchTerm } from "../../../store/searchSlice"
+import { useDispatch, useSelector } from "react-redux";
 
 const Navbar = ({
     searchOpen,
     setSearchOpen,
-    search,
-    setSearch,
     menuOpen,
     setMenuOpen,
-    inputRef,
+    // inputRef,
     wrapperRef,
 }) => {
+    const dispatch = useDispatch();
+    const searchTerm = useSelector(state => state.search.term);
 
     return (
         <div className="flex items-center space-x-3">
@@ -23,10 +25,10 @@ const Navbar = ({
                     onClick={() => setSearchOpen(true)}
                 ></i>
                 <input
-                    ref={inputRef}
+                    // ref={inputRef}
                     type="text"
-                    value={search}
-                    onChange={(e) => setSearch(e.target.value)}
+                    value={searchTerm}
+                    onChange={(e) => dispatch(setSearchTerm(e.target.value))}
                     placeholder="Search"
                     className={`bg-transparent outline-none w-full transition-opacity duration-300 ${searchOpen ? "opacity-100" : "opacity-0 pointer-events-none"
                         }`}

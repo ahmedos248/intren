@@ -5,6 +5,8 @@ import Header from "./components/common/header/Header.jsx";
 import Product from "./pages/Product.jsx"
 import About from "./pages/About.jsx";
 import WishlistPage from "./pages/WishlistPage.jsx";
+import CollectionPage from "./pages/CollectionPage.jsx";
+import Shop from "./pages/Shop.jsx";
 
 function App() {
   return (
@@ -14,7 +16,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/blog" element={<Blog />} />
-          <Route path="/shop" element={<Product />} />
+          <Route path="/shop" element={<Shop />} />
+          <Route path="/product/:id" element={<Product />} />
+          <Route path="/collection/:id" element={<CollectionPage />} />
           <Route path="/about" element={<About />} />
           <Route path="/wishlist" element={<WishlistPage />} />
         </Routes>

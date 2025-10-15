@@ -1,55 +1,113 @@
 {
-    "newArrivals": [
+    "products": [
         {
             "id": 1,
             "img": "/images/elegant.png",
             "title": "Elegant Evening Dress",
-            "desc": "Perfect for special occasions"
+            "desc": "Perfect for special occasions",
+            "category": "Dresses",
+            "collectionId": 1,
+            "isNew": true,
+            "isBestSeller": false,
+            "price": 120,
+            "rating": 4.7
         },
         {
             "id": 2,
             "img": "/images/casual.png",
             "title": "Casual Weekend Wear",
-            "desc": "Comfortable and stylish for everyday"
+            "desc": "Comfortable and stylish for everyday",
+            "category": "Casual",
+            "collectionId": 2,
+            "isNew": true,
+            "isBestSeller": false,
+            "price": 90,
+            "rating": 4.5
         },
         {
             "id": 3,
             "img": "/images/dress.png",
             "title": "Summer Breeze Dress",
-            "desc": "Light and airy for warm days"
+            "desc": "Light and airy for warm days",
+            "category": "Dresses",
+            "collectionId": 1,
+            "isNew": true,
+            "isBestSeller": false,
+            "price": 110,
+            "rating": 4.6
         },
         {
             "id": 4,
             "img": "/images/suit.png",
             "title": "Sophisticated Suit",
-            "desc": "Sharp and refined for formal wear"
-        }
-    ],
-    "bestSellers": [
+            "desc": "Sharp and refined for formal wear",
+            "category": "Formal",
+            "collectionId": 4,
+            "isNew": true,
+            "isBestSeller": false,
+            "price": 250,
+            "rating": 4.8
+        },
         {
-            "id": 1,
+            "id": 5,
             "img": "/images/handbag.png",
             "title": "Classic Leather Handbag",
-            "desc": "A must-have accessory for any wardrobe"
+            "desc": "A must-have accessory for any wardrobe",
+            "category": "Accessories",
+            "collectionId": 3,
+            "isNew": false,
+            "isBestSeller": true,
+            "price": 85,
+            "rating": 4.9
         },
         {
-            "id": 2,
+            "id": 6,
             "img": "/images/trench.png",
             "title": "Timeless Trench Coat",
-            "desc": "An iconic piece for all seasons"
+            "desc": "An iconic piece for all seasons",
+            "category": "Outerwear",
+            "collectionId": 4,
+            "isNew": false,
+            "isBestSeller": true,
+            "price": 160,
+            "rating": 4.7
         },
         {
-            "id": 3,
+            "id": 7,
             "img": "/images/perfume.png",
             "title": "Signature Scent Perfume",
-            "desc": "A captivating fragrance that leaves a lasting impression"
+            "desc": "A captivating fragrance that leaves a lasting impression",
+            "category": "Perfume",
+            "collectionId": 3,
+            "isNew": false,
+            "isBestSeller": true,
+            "price": 70,
+            "rating": 4.5
         },
         {
-            "id": 4,
+            "id": 8,
             "img": "/images/denim.png",
             "title": "Essential Denim Jeans",
-            "desc": "The perfect fit for any occasion"
+            "desc": "The perfect fit for any occasion",
+            "category": "Clothing",
+            "collectionId": 2,
+            "isNew": false,
+            "isBestSeller": true,
+            "price": 95,
+            "rating": 4.6
         }
+    ],
+    "newArrivals": [
+        1,
+        2,
+        3,
+        4
+    ],
+    "bestSellers": [
+        5,
+        6,
+        7,
+        8
     ],
     "collections": [
         {
@@ -76,6 +134,15 @@
             "title": "Travel Ready",
             "desc": "Pack smart and stylish for your next adventure"
         }
+    ],
+    "categories": [
+        "Dresses",
+        "Casual",
+        "Formal",
+        "Accessories",
+        "Outerwear",
+        "Perfume",
+        "Clothing"
     ],
     "blog": [
         {
@@ -109,29 +176,29 @@
         {
             "id": 5,
             "img": "/images/wardrobe.png",
-            "title": "The Ultimate Guide to Sustainable Fashion",
-            "desc": "Discover how to make eco-friendly choices in your wardrobe.",
+            "title": "Building a Sustainable Wardrobe",
+            "desc": "Discover how to make eco-friendly choices in your wardrobe",
             "category": "Fashion"
         },
         {
             "id": 6,
             "img": "/images/trendy.png",
             "title": "Top 5 Fashion Trends for 2024",
-            "desc": "Stay ahead of the curve with the latest fashion trends.",
+            "desc": "Stay ahead of the curve with the latest fashion trends",
             "category": "Trends"
         },
         {
             "id": 7,
             "img": "/images/versatile.png",
-            "title": "How to Style a Capsule Wardrobe",
-            "desc": "Simplify your style with a versatile capsule wardrobe.",
+            "title": "How to Style a Capsule Wardrobe Effectively",
+            "desc": "Simplify your style with a versatile capsule wardrobe",
             "category": "Lifestyle"
         },
         {
             "id": 8,
             "img": "/images/look.png",
             "title": "The Best Accessories for Every Occasion",
-            "desc": "Complete your look with the perfect accessories.",
+            "desc": "Complete your look with the perfect accessories",
             "category": "Reviews"
         }
     ]
