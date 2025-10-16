@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../store/productsSlice";
 import BlogSection from "./BlogSection";
 import { Link } from "react-router-dom";
-import CollectionsSection from "./CollectionsSection ";
+import CollectionsSection from "./CollectionsSection";
 
 const Card = ({ id, img, title }) => (
     <Link

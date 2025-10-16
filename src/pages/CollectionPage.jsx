@@ -9,16 +9,14 @@ const CollectionPage = () => {
     const { items, collections, status } = useSelector((s) => s.products);
 
     useEffect(() => {
-        if (status === "idle") {
-            dispatch(fetchProducts());
-            dispatch(fetchCollections());
-        }
-    }, [dispatch, status]);
+        dispatch(fetchProducts());
+        dispatch(fetchCollections());
+    }, [dispatch]);
 
-    const collection = collections.find((c) => c.id === Number(id));
-    const filteredProducts = items.filter((p) => p.collectionId === Number(id));
+    const collection = collections.find((c) => Number(c.id) === Number(id));
+    const filteredProducts = items.filter((p) => Number(p.collectionId) === Number(id));
 
-    if (status === "loading") return <p>Loading...</p>;
+    if (status === "loading" && !collections.length) return <p>Loading...</p>;
     if (!collection) return <p>Collection not found</p>;
 
     return (
@@ -30,7 +28,11 @@ const CollectionPage = () => {
                 {filteredProducts.length > 0 ? (
                     filteredProducts.map((p) => (
                         <div key={p.id} className="p-4 border rounded-lg">
-                            <img src={p.img} alt={p.title} className="w-full h-48 object-cover rounded-lg" />
+                            <img
+                                src={p.img}
+                                alt={p.title}
+                                className="w-full h-48 object-cover rounded-lg"
+                            />
                             <h3 className="mt-2 font-medium">{p.title}</h3>
                             <p className="text-gray-500 text-sm">{p.desc}</p>
                             <p className="text-sm font-semibold">${p.price}</p>

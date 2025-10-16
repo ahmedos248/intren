@@ -9,10 +9,17 @@ export const fetchProducts = createAsyncThunk("products/fetchProducts", async ()
     return res.data;
 });
 
-export const fetchProductById = createAsyncThunk("products/fetchProductById", async (id) => {
-    const res = await axios.get(`${API}/products/${id}`);
-    return res.data;
-});
+export const fetchProductById = createAsyncThunk(
+    "products/fetchProductById",
+    async (id) => {
+        const [productRes, reviewsRes] = await Promise.all([
+            axios.get(`${API}/products/${id}`),
+            axios.get(`${API}/reviews?productId=${id}`)
+        ]);
+        return { ...productRes.data, reviews: reviewsRes.data };
+    }
+);
+
 
 export const fetchCollections = createAsyncThunk("products/fetchCollections", async () => {
     const res = await axios.get(`${API}/collections`);

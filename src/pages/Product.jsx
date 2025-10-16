@@ -1,39 +1,77 @@
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { fetchProducts } from "../store/productsSlice";
+import { fetchProductById } from "../store/productsSlice";
+import Reviews from "../components/product/Reviews";
 
 export default function Product() {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { items, status } = useSelector((s) => s.products);
+  const { product, status } = useSelector((s) => s.products);
 
   useEffect(() => {
-    if (status === "idle") dispatch(fetchProducts());
-  }, [dispatch, status]);
+    dispatch(fetchProductById(Number(id)));
+  }, [dispatch, id]);
 
-  const product = items.find((p) => p.id === Number(id));
 
   if (status === "loading") return <p>Loading...</p>;
   if (!product) return <p>Product not found</p>;
 
   return (
-    <div className="max-w-4xl mx-auto py-10 px-4">
-      <div className="grid md:grid-cols-2 gap-8">
-        <img
-          src={product.img}
-          alt={product.title}
-          className="w-full h-96 object-cover rounded-lg"
-        />
+    <div className="max-w-6xl mx-auto px-4 py-12">
+      <p className="text-gray-500 text-sm mb-6">
+        Home / {product.category || "Category"} / {product.title}
+      </p>
+
+      {/* Images */}
+      <div className="grid md:grid-cols-2 gap-8 mb-10">
+        {product.images?.map((img, i) => (
+          <img
+            key={i}
+            src={img}
+            alt={product.title}
+            className="w-full h-[500px] object-cover rounded-lg"
+          />
+        ))}
+      </div>
+
+      {/* Product Info */}
+      <h1 className="text-3xl font-semibold mb-3">{product.title}</h1>
+      <p className="text-gray-700 mb-6 max-w-3xl">{product.desc}</p>
+
+      <div className="grid sm:grid-cols-2 gap-6 mb-8 text-gray-700">
         <div>
-          <h1 className="text-2xl font-semibold mb-2">{product.title}</h1>
-          <p className="text-gray-600 mb-4">{product.desc}</p>
-          <p className="text-lg font-medium mb-2">Category: {product.category}</p>
-          <p className="text-xl font-semibold text-gray-900 mb-4">
-            ${product.price}
-          </p>
-          <p className="text-yellow-500">⭐ {product.rating}</p>
+          <p><span className="font-medium">Price:</span> ${product.price}</p>
+          <p><span className="font-medium">Material:</span> {product.material || "100% Silk"}</p>
         </div>
+        <div>
+          <p><span className="font-medium">Sizes:</span> {product.sizes?.join(", ") || "XS, S, M, L, XL"}</p>
+          <p><span className="font-medium">Care Instructions:</span> {product.care || "Dry clean only"}</p>
+        </div>
+      </div>
+
+      {/* Buttons */}
+      <div className="flex gap-4 mb-12">
+        <button className="bg-black text-white px-6 py-3 rounded-md hover:bg-gray-800 transition">
+          Add to Cart
+        </button>
+        <button className="border border-gray-300 px-6 py-3 rounded-md hover:bg-gray-100 transition">
+          Add to Wishlist
+        </button>
+      </div>
+
+      {/* Reviews */}
+      <div>
+        <h2 className="text-2xl font-semibold mb-4">Customer Reviews</h2>
+
+        <div className="flex items-center gap-3 mb-4">
+          <p className="text-4xl font-bold">{product.rating || 4.6}</p>
+          <div>
+            <p className="text-yellow-500 text-lg">★★★★★</p>
+            <p className="text-gray-500 text-sm">{product.reviewsCount || 150} reviews</p>
+          </div>
+        </div>
+        <Reviews />
       </div>
     </div>
   );
