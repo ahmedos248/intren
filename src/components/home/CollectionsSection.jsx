@@ -24,11 +24,13 @@ const CollectionsSection = () => {
                         key={col.id}
                         className="p-4 border rounded-lg hover:shadow-lg transition"
                     >
-                        <img
-                            src={col.img}
-                            alt={col.title}
-                            className="w-full h-48 object-cover rounded-lg"
-                        />
+                        {Array.isArray(col.images) && col.images.length > 0 && (
+                            <img
+                                src={process.env.PUBLIC_URL + col.images[0]}
+                                alt={col.title}
+                                className="w-full max-h-96 object-cover rounded-lg mb-6"
+                            />
+                        )}
                         <h3 className="mt-2 font-medium">{col.title}</h3>
                         <p className="text-sm text-gray-500">{col.desc}</p>
                     </Link>

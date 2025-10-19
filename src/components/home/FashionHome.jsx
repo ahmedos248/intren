@@ -5,19 +5,20 @@ import BlogSection from "./BlogSection";
 import { Link } from "react-router-dom";
 import CollectionsSection from "./CollectionsSection";
 
-const Card = ({ id, img, title }) => (
+const Card = ({ id, images, title }) => (
     <Link
         to={`/product/${id}`}
         className="p-4 border rounded-lg hover:shadow-lg transition"
     >
         <img
-            src={img}
+            src={images && images.length > 0 ? images[0] : "/placeholder.jpg"}
             alt={title}
             className="w-full h-48 object-cover rounded-lg"
         />
         <h3 className="font-medium mt-2">{title}</h3>
     </Link>
 );
+
 
 const Section = ({ title, type }) => {
     const dispatch = useDispatch();

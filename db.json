@@ -2,7 +2,10 @@
     "products": [
         {
             "id": 1,
-            "img": "/images/elegant.png",
+            "images": [
+                "/images/dress1.png",
+                "/images/dress2.png"
+            ],
             "title": "Elegant Evening Dress",
             "desc": "Perfect for special occasions",
             "category": "Dresses",
@@ -14,7 +17,10 @@
         },
         {
             "id": 2,
-            "img": "/images/casual.png",
+            "images": [
+                "/images/casual.png",
+                "/images/casual2.png"
+            ],
             "title": "Casual Weekend Wear",
             "desc": "Comfortable and stylish for everyday",
             "category": "Casual",
@@ -26,7 +32,10 @@
         },
         {
             "id": 3,
-            "img": "/images/dress.png",
+            "images": [
+                "/images/dress.png",
+                "/images/dress3.png"
+            ],
             "title": "Summer Breeze Dress",
             "desc": "Light and airy for warm days",
             "category": "Dresses",
@@ -38,7 +47,10 @@
         },
         {
             "id": 4,
-            "img": "/images/suit.png",
+            "images": [
+                "/images/suit.png",
+                "/images/suit2.png"
+            ],
             "title": "Sophisticated Suit",
             "desc": "Sharp and refined for formal wear",
             "category": "Formal",
@@ -50,7 +62,10 @@
         },
         {
             "id": 5,
-            "img": "/images/handbag.png",
+            "images": [
+                "/images/Leather-Handbag1.jpg",
+                "/images/Leather-Handbag2.jpg"
+            ],
             "title": "Classic Leather Handbag",
             "desc": "A must-have accessory for any wardrobe",
             "category": "Accessories",
@@ -62,7 +77,10 @@
         },
         {
             "id": 6,
-            "img": "/images/trench.png",
+            "images": [
+                "/images/trench.png",
+                "/images/trench2.png"
+            ],
             "title": "Timeless Trench Coat",
             "desc": "An iconic piece for all seasons",
             "category": "Outerwear",
@@ -74,7 +92,10 @@
         },
         {
             "id": 7,
-            "img": "/images/perfume.png",
+            "images": [
+                "/images/perfume.png",
+                "/images/perfume2.png"
+            ],
             "title": "Signature Scent Perfume",
             "desc": "A captivating fragrance that leaves a lasting impression",
             "category": "Perfume",
@@ -86,7 +107,10 @@
         },
         {
             "id": 8,
-            "img": "/images/denim.png",
+            "images": [
+                "/images/denim.png",
+                "/images/denim2.png"
+            ],
             "title": "Essential Denim Jeans",
             "desc": "The perfect fit for any occasion",
             "category": "Clothing",
@@ -100,25 +124,33 @@
     "collections": [
         {
             "id": 1,
-            "img": "/images/summer.png",
+            "images": [
+                "/images/summer.png"
+            ],
             "title": "Summer Essentials",
             "desc": "Stay cool and chic with our summer collection"
         },
         {
             "id": 2,
-            "img": "/images/work.png",
+            "images": [
+                "/images/work.png"
+            ],
             "title": "Work From Home Style",
             "desc": "Comfort and style for your home office"
         },
         {
             "id": 3,
-            "img": "/images/date.png",
+            "images": [
+                "/images/date.png"
+            ],
             "title": "Date Night Outfits",
             "desc": "Dress to impress on your special night"
         },
         {
             "id": 4,
-            "img": "/images/travel.png",
+            "images": [
+                "/images/travel.png"
+            ],
             "title": "Travel Ready",
             "desc": "Pack smart and stylish for your next adventure"
         }

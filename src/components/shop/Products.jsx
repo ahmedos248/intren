@@ -11,7 +11,7 @@ const Products = ({ filteredProducts }) => {
                     className="border rounded-lg p-4 hover:shadow-lg transition-shadow duration-200"
                 >
                     <img
-                        src={product.img}
+                        src={product.images && product.images.length > 0 ? process.env.PUBLIC_URL + product.images[0] : "/placeholder.jpg"}
                         alt={product.title}
                         className="w-full h-48 object-cover mb-3 rounded-md"
                     />

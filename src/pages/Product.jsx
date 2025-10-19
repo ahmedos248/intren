@@ -23,17 +23,22 @@ export default function Product() {
         Home / {product.category || "Category"} / {product.title}
       </p>
 
-      {/* Images */}
-      <div className="grid md:grid-cols-2 gap-8 mb-10">
-        {product.images?.map((img, i) => (
-          <img
-            key={i}
-            src={img}
-            alt={product.title}
-            className="w-full h-[500px] object-cover rounded-lg"
-          />
-        ))}
+      <div className="grid grid-cols-2 gap-4 mb-10">
+        {Array.isArray(product.images) && product.images.length > 0 ? (
+          product.images.map((img, index) => (
+            <img
+              key={index}
+              src={process.env.PUBLIC_URL + img}
+              alt={`${product.title} ${index + 1}`}
+              className="w-full rounded-lg object-cover"
+            />
+          ))
+        ) : (
+          <p>No image available</p>
+        )}
       </div>
+
+
 
       {/* Product Info */}
       <h1 className="text-3xl font-semibold mb-3">{product.title}</h1>

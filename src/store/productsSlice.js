@@ -3,12 +3,13 @@ import axios from "axios";
 
 const API = "http://localhost:5000";
 
-// Thunks
+// Fetch all products
 export const fetchProducts = createAsyncThunk("products/fetchProducts", async () => {
     const res = await axios.get(`${API}/products`);
     return res.data;
 });
 
+// Fetch single product + its reviews
 export const fetchProductById = createAsyncThunk(
     "products/fetchProductById",
     async (id) => {
@@ -16,22 +17,29 @@ export const fetchProductById = createAsyncThunk(
             axios.get(`${API}/products/${id}`),
             axios.get(`${API}/reviews?productId=${id}`)
         ]);
-        return { ...productRes.data, reviews: reviewsRes.data };
+
+        if (!productRes.data) throw new Error("Product not found");
+
+        return {
+            ...productRes.data,
+            reviews: reviewsRes.data || [],
+        };
     }
 );
 
 
+// Fetch all collections
 export const fetchCollections = createAsyncThunk("products/fetchCollections", async () => {
     const res = await axios.get(`${API}/collections`);
     return res.data;
 });
 
+// Fetch blog posts
 export const fetchBlogs = createAsyncThunk("products/fetchBlogs", async () => {
     const res = await axios.get(`${API}/blog`);
     return res.data;
 });
 
-// Slice
 const productsSlice = createSlice({
     name: "products",
     initialState: {
@@ -60,21 +68,40 @@ const productsSlice = createSlice({
 
     extraReducers: (builder) => {
         builder
-            // Fetch Products
-            .addCase(fetchProducts.pending, (s) => { s.status = "loading"; })
+            // 🔹 Fetch all products
+            .addCase(fetchProducts.pending, (s) => {
+                s.status = "loading";
+            })
             .addCase(fetchProducts.fulfilled, (s, a) => {
                 s.status = "succeeded";
-                s.items = a.payload;
-                s.newArrivals = a.payload.filter(p => p.isNew);
-                s.bestSellers = a.payload.filter(p => p.isBestSeller);
+                s.items = a.payload || [];
+                s.newArrivals = s.items.filter(p => p.isNew);
+                s.bestSellers = s.items.filter(p => p.isBestSeller);
             })
             .addCase(fetchProducts.rejected, (s, a) => {
                 s.status = "failed";
                 s.error = a.error.message;
             })
 
-            // Fetch Collections
-            .addCase(fetchCollections.pending, (s) => { s.status = "loading"; })
+            // 🔹 Fetch single product by ID
+            .addCase(fetchProductById.pending, (s) => {
+                s.status = "loading";
+            })
+            .addCase(fetchProductById.fulfilled, (state, action) => {
+                state.status = "succeeded";
+                state.product = action.payload || null;
+            })
+
+
+            .addCase(fetchProductById.rejected, (s, a) => {
+                s.status = "failed";
+                s.error = a.error.message;
+            })
+
+            // 🔹 Fetch collections
+            .addCase(fetchCollections.pending, (s) => {
+                s.status = "loading";
+            })
             .addCase(fetchCollections.fulfilled, (s, a) => {
                 s.status = "succeeded";
                 s.collections = Array.isArray(a.payload) ? a.payload : [a.payload];
@@ -84,19 +111,10 @@ const productsSlice = createSlice({
                 s.error = a.error.message;
             })
 
-            // Fetch Product By ID
-            .addCase(fetchProductById.pending, (s) => { s.status = "loading"; })
-            .addCase(fetchProductById.fulfilled, (s, a) => {
-                s.status = "succeeded";
-                s.product = a.payload;
+            // 🔹 Fetch blog posts
+            .addCase(fetchBlogs.pending, (s) => {
+                s.status = "loading";
             })
-            .addCase(fetchProductById.rejected, (s, a) => {
-                s.status = "failed";
-                s.error = a.error.message;
-            })
-
-            // Fetch Blogs
-            .addCase(fetchBlogs.pending, (s) => { s.status = "loading"; })
             .addCase(fetchBlogs.fulfilled, (s, a) => {
                 s.status = "succeeded";
                 s.blog = Array.isArray(a.payload) ? a.payload : [a.payload];
