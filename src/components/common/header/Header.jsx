@@ -17,7 +17,7 @@ export default function Header() {
                 <div className="flex items-center md:space-x-4 space-x-2 transition-all duration-300">
                     <i className="fa-solid fa-cube transform scale-x-[-1] text-sm"></i>
                     <span
-                        className={`font-bold md:text-2xl text-lg transition-opacity duration-300 ${searchOpen ? "sm:opacity-100 opacity-0 w-8" : "opacity-100 w-8"}`}
+                        className={`font-bold md:text-2xl text-lg transition-opacity duration-300 ${searchOpen ? "sm:opacity-100 opacity-0 w-1" : "opacity-100 w-1"}`}
                     >
                         StyleHub
                     </span>
