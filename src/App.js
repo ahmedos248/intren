@@ -7,6 +7,7 @@ import About from "./pages/About.jsx";
 import WishlistPage from "./pages/WishlistPage.jsx";
 import CollectionPage from "./pages/CollectionPage.jsx";
 import Shop from "./pages/Shop.jsx";
+import Cart from "./pages/Cart.jsx";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/shop" element={<Shop />} />
+          <Route path="/cart" element={<Cart />} />
           <Route path="/product/:id" element={<Product />} />
           <Route path="/collection/:id" element={<CollectionPage />} />
           <Route path="/about" element={<About />} />

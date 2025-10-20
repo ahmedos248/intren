@@ -7,17 +7,17 @@ const Navbar = ({
     setSearchOpen,
     menuOpen,
     setMenuOpen,
-    // inputRef,
     wrapperRef,
 }) => {
     const dispatch = useDispatch();
     const searchTerm = useSelector(state => state.search.term);
+    const products = useSelector(state => state.cart.products);
 
     return (
         <div className="flex items-center space-x-3">
             <div
                 ref={wrapperRef}
-                className={`flex items-center bg-[#F2F2F2] rounded-xl transition-all duration-300 overflow-hidden justify-center px-3 p-2.5 ${searchOpen ? "w-56 space-x-4" : "w-12"
+                className={`flex items-center bg-[#F2F2F2] rounded-xl transition-all duration-300 overflow-hidden justify-center px-3 p-2.5 ${searchOpen ? "w-48 space-x-4" : "w-12"
                     }`}
             >
                 <i
@@ -25,7 +25,6 @@ const Navbar = ({
                     onClick={() => setSearchOpen(true)}
                 ></i>
                 <input
-                    // ref={inputRef}
                     type="text"
                     value={searchTerm}
                     onChange={(e) => dispatch(setSearchTerm(e.target.value))}
@@ -34,12 +33,14 @@ const Navbar = ({
                         }`}
                 />
             </div>
-            <div className="md:flex hidden items-center space-x-3 text-2xl text-[#141414]">
+            <div className={`flex items-center space-x-3 text-2xl text-[#141414] transition-all ${searchOpen ? " lg:flex lg:w-28 lg:opacity-100 lg:scale-100 w-1 opacity-0 scale-0" : "flex w-28 delay-200"}`}>
                 <Link to="/wishlist" className="p-3 py-2.5 rounded-xl bg-[#F2F2F2]">
                     <i className="fa-regular fa-heart"></i>
                 </Link>
-                <Link to="/cart" className="p-3 rounded-xl bg-[#F2F2F2]">
-                    <img src="images/cart.svg" alt="" className="w-7 h-7" />
+                <Link to="/cart" className="p-3 rounded-xl bg-[#F2F2F2] relative">
+                    <img src={process.env.PUBLIC_URL + '/images/cart.svg'}
+                        alt="cart" className="w-7 h-7" />
+                    {products.length > 0 && <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full px-2 py-0.5">{products.length}</span>}
                 </Link>
             </div>
             <div className="lg:hidden">
@@ -51,7 +52,7 @@ const Navbar = ({
                 </button>
             </div>
             <img
-                src="images/nav.png"
+                src={process.env.PUBLIC_URL + '/images/nav.png'}
                 alt="profile"
                 className="w-12 h-12 rounded-full object-cover"
             />

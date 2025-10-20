@@ -7,5 +7,6 @@ export const store = configureStore({
         wishlist: wishlistReducer,
         products: productsReducer,
         search: searchReducer,
+        cart: require('./cartSlice').default,
     },
 });

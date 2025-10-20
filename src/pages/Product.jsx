@@ -3,11 +3,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchProductById } from "../store/productsSlice";
 import Reviews from "../components/product/Reviews";
+import { addToCart } from "../store/cartSlice";
 
 export default function Product() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { product, status } = useSelector((s) => s.products);
+  const handeleAddToCart = (e, product) => {
+    e.stopPropagation();
+    e.preventDefault();
+    dispatch(addToCart(product))
+    alert("Product added to cart")
+  }
 
   useEffect(() => {
     dispatch(fetchProductById(Number(id)));
@@ -57,7 +64,8 @@ export default function Product() {
 
       {/* Buttons */}
       <div className="flex gap-4 mb-12">
-        <button className="bg-black text-white px-6 py-3 rounded-md hover:bg-gray-800 transition">
+        <button className="bg-black text-white px-6 py-3 rounded-md hover:bg-gray-800 transition"
+          onClick={(e) => handeleAddToCart(e, product)}>
           Add to Cart
         </button>
         <button className="border border-gray-300 px-6 py-3 rounded-md hover:bg-gray-100 transition">
