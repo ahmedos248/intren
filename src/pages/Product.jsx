@@ -1,205 +1,91 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { fetchProductById } from "../store/productsSlice";
+import Reviews from "../components/product/Reviews";
+import { addToCart } from "../store/cartSlice";
 
-const Product = () => {
-  const [cart, setCart] = useState([]);
-  const [wishlist, setWishlist] = useState([]);
-  const [isCartOpen, setIsCartOpen] = useState(false);
+export default function Product() {
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  const { product, status } = useSelector((s) => s.products);
+  const handeleAddToCart = (e, product) => {
+    e.stopPropagation();
+    e.preventDefault();
+    dispatch(addToCart(product))
+    alert("Product added to cart")
+  }
 
-  const product = {
-    name: "Elegant Red Evening Gown",
-    price: 299.99,
-    material: "100% Silk",
-    sizes: ["XS", "S", "M", "L", "XL"],
-    care: "Dry clean only",
-    images: {
-      illustration: "/images/dress1.png",
-      photo: "/images/dress2.png",
-    },
-    rating: 4.6,
-    totalReviews: 150,
-    reviews: [
-      {
-        name: "Sophia Carter",
-        date: "May 15, 2024",
-        stars: 5,
-        text: "Absolutely love this dress! The color is vibrant, and the fit is perfect.",
-        image: "/images/sophia.png",
-      },
-      {
-        name: "Olivia Bennett",
-        date: "May 10, 2024",
-        stars: 4,
-        text: "The dress is beautiful and well-made, but the material is delicate.",
-        image: "/images/olivia.png",
-      },
-      {
-        name: "Isabella Harper",
-        date: "May 5, 2024",
-        stars: 5,
-        text: "This gown exceeded my expectations. Highly recommend!",
-        image: "/images/isabella.png",
-      },
-    ],
-  };
+  useEffect(() => {
+    dispatch(fetchProductById(Number(id)));
+  }, [dispatch, id]);
 
-  const addToCart = () => setCart([...cart, product]);
-  const addToWishlist = () => setWishlist([...wishlist, product]);
+
+  if (status === "loading") return <p>Loading...</p>;
+  if (!product) return <p>Product not found</p>;
 
   return (
-    <div className="bg-gray-100 min-h-screen flex justify-center py-8">
-      <div className="max-w-6xl bg-white rounded shadow px-8 py-8">
-        <div style={{ display: "flex", gap: "10px" }}>
-          <img
-            style={{ width: "300px", borderRadius: "10px", height: "500px" }}
-            src={product.images.illustration}
-            alt="illustration"
-          />
-          <img
-            style={{ width: "300px", borderRadius: "10px", height: "500px" }}
-            src={product.images.photo}
-            alt="photo"
-          />
+    <div className="max-w-6xl mx-auto px-4 py-12">
+      <p className="text-gray-500 text-sm mb-6">
+        Home / {product.category || "Category"} / {product.title}
+      </p>
+
+      <div className="grid grid-cols-2 gap-4 mb-10">
+        {Array.isArray(product.images) && product.images.length > 0 ? (
+          product.images.map((img, index) => (
+            <img
+              key={index}
+              src={process.env.PUBLIC_URL + img}
+              alt={`${product.title} ${index + 1}`}
+              className="w-full rounded-lg object-cover"
+            />
+          ))
+        ) : (
+          <p>No image available</p>
+        )}
+      </div>
+
+
+
+      {/* Product Info */}
+      <h1 className="text-3xl font-semibold mb-3">{product.title}</h1>
+      <p className="text-gray-700 mb-6 max-w-3xl">{product.desc}</p>
+
+      <div className="grid sm:grid-cols-2 gap-6 mb-8 text-gray-700">
+        <div>
+          <p><span className="font-medium">Price:</span> ${product.price}</p>
+          <p><span className="font-medium">Material:</span> {product.material || "100% Silk"}</p>
         </div>
-
-        <div className="mt-8">
-          <h2 className="text-2xl font-bold">{product.name}</h2>
-          <p className="text-gray-600 mt-3">
-            This stunning red evening gown is perfect for any special occasion.
-            Made from luxurious silk, it features a flattering silhouette and
-            intricate detailing. Available in sizes XS to XL.
-          </p>
-
-          <h3 className="mt-6 mb-3 font-semibold">Details</h3>
-          <div className="border-t border-b divide-y">
-            <div className="grid grid-cols-2 gap-4 py-4 text-sm">
-              <div>
-                <div className="text-gray-500 text-xs">Price</div>
-                <div className="font-medium">${product.price.toFixed(2)}</div>
-              </div>
-              <div>
-                <div className="text-gray-500 text-xs">Material</div>
-                <div>{product.material}</div>
-              </div>
-            </div>
-            <div className="grid grid-cols-2 gap-4 py-4 text-sm">
-              <div>
-                <div className="text-gray-500 text-xs">Sizes</div>
-                <div>{product.sizes.join(", ")}</div>
-              </div>
-              <div>
-                <div className="text-gray-500 text-xs">Care Instructions</div>
-                <div>{product.care}</div>
-              </div>
-            </div>
-          </div>
-
-          {/* الأزرار */}
-          <div className="mt-6 flex gap-3">
-            <button
-              className="bg-black text-white px-4 py-2 rounded text-sm"
-              onClick={addToCart}
-            >
-              Add to Cart
-            </button>
-            <button
-              className="border px-3 py-2 rounded text-sm"
-              onClick={() => setIsCartOpen(true)}
-            >
-              Open Cart ({cart.length})
-            </button>
-            <button
-              className="border px-3 py-2 rounded text-sm bg-black text-white"
-              onClick={addToWishlist}
-            >
-              Add to Wishlist
-            </button>
-            <Link
-              to="/wishlist"
-              className="border px-3 py-2 rounded text-sm"
-            >
-              Open Wishlist ({wishlist.length})
-            </Link>
-          </div>
-        </div>
-
-        <div className="mt-10">
-          <h3 className="text-xl font-semibold mb-4">Customer Reviews</h3>
-          {product.reviews.map((r, i) => (
-            <div key={i} className="border-b pb-4">
-              <div className="flex gap-2">
-                <img
-                  className="w-12 h-12 rounded-full object-cover"
-                  src={r.image}
-                  alt={r.name}
-                />
-                <div>
-                  <div className="font-semibold">{r.name}</div>
-                  <div className="text-sm text-gray-500">{r.date}</div>
-                </div>
-              </div>
-              <div className="text-yellow-500 text-2xl">
-                {"★".repeat(r.stars)}{"☆".repeat(5 - r.stars)}
-              </div>
-              <p className="mt-2 text-gray-700">{r.text}</p>
-            </div>
-          ))}
+        <div>
+          <p><span className="font-medium">Sizes:</span> {product.sizes?.join(", ") || "XS, S, M, L, XL"}</p>
+          <p><span className="font-medium">Care Instructions:</span> {product.care || "Dry clean only"}</p>
         </div>
       </div>
 
-      {/* {isCartOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center">
-          <div className="bg-white rounded-lg shadow-lg p-6 w-96 relative">
-            <button
-              className="absolute top-2 right-2 text-gray-500"
-              onClick={() => setIsCartOpen(false)}
-            >
-              ✖
-            </button>
-            <h2 className="text-lg font-bold mb-4">Shopping Cart</h2>
-            {cart.length === 0 ? (
-              <p>Your cart is empty</p>
-            ) : (
-              <ul className="space-y-3">
-                {cart.map((item, i) => (
-                  <li key={i} className="flex justify-between border-b pb-2">
-                    <span>{item.name}</span>
-                    <span>${item.price.toFixed(2)}</span>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
-        </div>
-      )} */}
+      {/* Buttons */}
+      <div className="flex gap-4 mb-12">
+        <button className="bg-black text-white px-6 py-3 rounded-md hover:bg-gray-800 transition"
+          onClick={(e) => handeleAddToCart(e, product)}>
+          Add to Cart
+        </button>
+        <button className="border border-gray-300 px-6 py-3 rounded-md hover:bg-gray-100 transition">
+          Add to Wishlist
+        </button>
+      </div>
 
-      {/* {isWishlistOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center">
-          <div className="bg-white rounded-lg shadow-lg p-6 w-96 relative">
-            <button
-              className="absolute top-2 right-2 text-gray-500"
-              onClick={() => setIsWishlistOpen(false)}
-            >
-              ✖
-            </button>
-            <h2 className="text-lg font-bold mb-4">Wishlist</h2>
-            {wishlist.length === 0 ? (
-              <p>Your wishlist is empty</p>
-            ) : (
-              <ul className="space-y-3">
-                {wishlist.map((item, i) => (
-                  <li key={i} className="flex justify-between border-b pb-2">
-                    <span>{item.name}</span>
-                    <span>${item.price.toFixed(2)}</span>
-                  </li>
-                ))}
-              </ul>
-            )}
+      {/* Reviews */}
+      <div>
+        <h2 className="text-2xl font-semibold mb-4">Customer Reviews</h2>
+
+        <div className="flex items-center gap-3 mb-4">
+          <p className="text-4xl font-bold">{product.rating || 4.6}</p>
+          <div>
+            <p className="text-yellow-500 text-lg">★★★★★</p>
+            <p className="text-gray-500 text-sm">{product.reviewsCount || 150} reviews</p>
           </div>
         </div>
-      )} */}
+        <Reviews />
+      </div>
     </div>
   );
 }
-
-export default Product;
