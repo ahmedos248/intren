@@ -19,6 +19,7 @@ export default function NavMenu({ isOpen, onClose }) {
                     <Link to="/blog">Blog</Link>
                     <Link to="/contact">Contact</Link>
                     <Link to="/about">About</Link>
+
                 </div>
             </div>
             {isOpen && (
