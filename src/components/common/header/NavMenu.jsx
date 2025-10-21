@@ -1,6 +1,15 @@
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logout } from "../../../store/userSlice";
+import { useSelector } from "react-redux";
 
 export default function NavMenu({ isOpen, onClose }) {
+    const dispatch = useDispatch();
+    const user = useSelector((state) => state.user.user);
+
+    const handleLogout = () => {
+        dispatch(logout());
+    };
     return (
         <>
             <div
@@ -19,7 +28,28 @@ export default function NavMenu({ isOpen, onClose }) {
                     <Link to="/blog">Blog</Link>
                     <Link to="/contact">Contact</Link>
                     <Link to="/about">About</Link>
-
+                    {!user ? (
+                        <Link
+                            to="/login"
+                            className="p-3 py-2.5 rounded-xl bg-[#F2F2F2] text-[#141414] text-sm font-medium"
+                        >
+                            Login
+                        </Link>
+                    ) : (
+                        <div className="flex items-center gap-3">
+                            <img
+                                src={user.image || process.env.PUBLIC_URL + "/images/nav.png"}
+                                alt={user.name}
+                                className="w-12 h-12 rounded-full object-cover border-2 border-[#F2F2F2]"
+                            />
+                            <button
+                                onClick={handleLogout}
+                                className="px-4 py-2 bg-red-500 text-white rounded-xl text-sm font-medium hover:bg-red-600 transition"
+                            >
+                                Logout
+                            </button>
+                        </div>
+                    )}
                 </div>
             </div>
             {isOpen && (

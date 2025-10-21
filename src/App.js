@@ -9,7 +9,9 @@ import Contact from "./pages/Contact.jsx";
 import ShoppingCart from "./pages/ShoppingCart";
 import CollectionPage from "./pages/CollectionPage.jsx";
 import Shop from "./pages/Shop.jsx";
-import Cart from "./pages/Cart.jsx";
+import Admin from "./pages/Admin.jsx";
+import AdminRoute from "./components/admin/AdminRoute.jsx";
+import Login from "./pages/Login.jsx";
 
 function App() {
   return (
@@ -20,14 +22,21 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/shop" element={<Shop />} />
-          <Route path="/cart" element={<Cart />} />
           <Route path="/product/:id" element={<Product />} />
           <Route path="/collection/:id" element={<CollectionPage />} />
           <Route path="/about" element={<About />} />
           <Route path="/wishlist" element={<WishlistPage />} />
-          <Route path="/contact" element={<Contact/>} />
-          <Route path="/shoppingcart" element={<ShoppingCart/>} />
-
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/shoppingcart" element={<ShoppingCart />} />
+          <Route path="/login" element={<Login />} />
+          <Route
+            path="/admin"
+            element={
+              <AdminRoute>
+                <Admin />
+              </AdminRoute>
+            }
+          />
         </Routes>
       </div>
     </div>

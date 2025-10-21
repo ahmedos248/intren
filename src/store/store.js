@@ -8,5 +8,6 @@ export const store = configureStore({
         products: productsReducer,
         search: searchReducer,
         cart: require('./cartSlice').default,
+        user: require('./userSlice').default,
     },
 });
