@@ -119,7 +119,211 @@
             "isBestSeller": true,
             "price": 95,
             "rating": 4.6
+        },
+
+{
+        "id": 9,
+        "images": [
+            "/images/summer.png",
+            "/images/summer2.png"
+        ],
+        "title": "Denim Bermuda shorts",
+        "desc": "Casual denim Bermuda shorts with a relaxed fit and modern style.",
+        "category": "Clothing",
+        "collectionId": 2,
+        "isNew": true,
+        "isBestSeller": false,
+        "price": 200,
+        "rating": 4.7
+    },
+    {
+        
+        "id": 10,
+        "images": [
+            "/images/wdress.png",
+            "/images/wdress2.png"
+        ],
+        "title": " Womens Dress",
+        "desc": " Stylish casual dress with a comfortable fit.",
+        "category": "Dresses",
+        "collectionId": 3,
+        "isNew": true,
+        "isBestSeller": false,
+        "price": 120,
+        "rating": 3.4
+    },
+    
+    {   
+    "id": 11,
+    "images": [
+        "/images/formal.png",
+        "/images/formal2.png"
+    ],
+    "title": " Womens formal",
+    "desc": " Elegant formal outfit for a classy and confident look.",
+    "category": "Formal",
+    "collectionId": 1,
+    "isNew": true,
+    "isBestSeller": false,
+    "price": 300,
+    "rating": 4.5
+},
+  {
+"id": 12,
+"images": [
+    "/images/mformal.png",
+    "/images/mformal2.png"
+],
+"title": " men formal",
+"desc": "Classic men's suit for a sharp and elegant look.",
+"category": "Formal",
+"collectionId": 2,
+"isNew": true,
+"isBestSeller": false,
+"price": 120,
+"rating": 4.6
+},
+{
+    
+"id": 13,
+"images": [
+    "/images/wpirfum.png",
+    "/images/wpirfum2.png"
+],
+"title": " mens Classic perfume",
+"desc": "Elegant and long-lasting fragrance for confident men.",
+"category": "Perfume",
+"collectionId": 2,
+"isNew": true,
+"isBestSeller": false,
+"price": 250,
+"rating": 4.4
+
+},
+{
+    
+    "id": 14,
+    "images": [
+        "/images/T-shirt.png",
+        "/images/T-shirt.png"
+    ],
+    "title": " Men T-shirt",
+    "desc": "Perfect for special occasions",
+    "category": "Clothing",
+    "collectionId": 1,
+    "isNew": true,
+    "isBestSeller": false,
+    "price": 200,
+    "rating": 4.6
+    },
+    {
+    
+        "id": 15,
+        "images": [
+            "/images/bag1.png",
+            "/images/bag12.png"
+        ],
+        "title": " Womens Stylish Handbag ",
+        "desc": "Elegant and practical design perfect for any occasion.",
+        "category": "Accessories",
+        "collectionId": 1,
+        "isNew": true,
+        "isBestSeller": false,
+        "price": 200,
+        "rating": 4.6
+        },{
+
+        
+    
+    "id": 16,
+    "images": [
+        "/images/bag2.png",
+        "/images/bag22.png"
+    ],
+    "title": " Womens Stylish Handbag",
+    "desc": "Elegant and practical design perfect for any occasion.",
+    "category": "Accessories",
+    "collectionId": 3,
+    "isNew": true,
+    "isBestSeller": false,
+    "price": 300,
+    "rating": 3.4
+    },{
+
+    
+    
+        "id": 17,
+        "images": [
+            "/images/ass1.png",
+            "/images/ass12.png"
+        ],
+        "title": " Womens Elegant Necklace",
+        "desc": "Chic accessory that adds a touch of sparkle to your outfit.",
+        "category": "Accessories",
+        "collectionId": 2,
+        "isNew": true,
+        "isBestSeller": false,
+        "price": 90,
+        "rating": 5.4
+        },
+        {
+            "id": 18,
+        "images": [
+            "/images/cas.png",
+            "/images/cas2.png"
+        ],
+        "title": " Womens Casual Outfit",
+        "desc": "Comfortable and stylish look for everyday wear.",
+        "category": "Casual",
+        "collectionId": 2,
+        "isNew": true,
+        "isBestSeller": false,
+        "price": 300,
+        "rating": 4.4
+        },{
+            "id": 19,
+            "images": [
+                "/images/slim jeans.png",
+                "/images/slim jeans2.png"
+            ],
+            "title": " Essential Denim Jeans",
+            "desc": "The perfect fit for any occasion",
+            "category": "Clothing",
+            "collectionId": 3,
+            "isNew": true,
+            "isBestSeller": false,
+            "price": 100,
+            "rating": 4.6
+
+
+
+
         }
+
+
+
+
+
+
+
+
+
+  
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     ],
     "collections": [
         {

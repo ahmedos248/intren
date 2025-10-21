@@ -10,7 +10,9 @@ import ShoppingCart from "./pages/ShoppingCart";
 import CollectionPage from "./pages/CollectionPage.jsx";
 import Shop from "./pages/Shop.jsx";
 import Cart from "./pages/Cart.jsx";
-
+import MyWishlist from "./pages/Mywishlist";
+import Questions from "./pages/Questions";
+import NotFound from "./pages/Notfound";
 function App() {
   return (
     <div>
@@ -27,6 +29,9 @@ function App() {
           <Route path="/wishlist" element={<WishlistPage />} />
           <Route path="/contact" element={<Contact/>} />
           <Route path="/shoppingcart" element={<ShoppingCart/>} />
+          <Route path="/mywishlist" element={<MyWishlist/>} />
+          <Route path="/questions" element={<Questions/>} />
+          <Route path="/notfound" element={<NotFound/>} />
 
         </Routes>
       </div>
