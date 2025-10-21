@@ -5,6 +5,8 @@ import Header from "./components/common/header/Header.jsx";
 import Product from "./pages/Product.jsx"
 import About from "./pages/About.jsx";
 import WishlistPage from "./pages/WishlistPage.jsx";
+import Contact from "./pages/Contact.jsx";
+import ShoppingCart from "./pages/ShoppingCart";
 import CollectionPage from "./pages/CollectionPage.jsx";
 import Shop from "./pages/Shop.jsx";
 import Cart from "./pages/Cart.jsx";
@@ -23,6 +25,9 @@ function App() {
           <Route path="/collection/:id" element={<CollectionPage />} />
           <Route path="/about" element={<About />} />
           <Route path="/wishlist" element={<WishlistPage />} />
+          <Route path="/contact" element={<Contact/>} />
+          <Route path="/shoppingcart" element={<ShoppingCart/>} />
+
         </Routes>
       </div>
     </div>
