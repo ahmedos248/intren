@@ -32,8 +32,6 @@ const CollectionPage = () => {
                 <h2 className="text-3xl font-semibold">{collection.title}</h2>
                 <p className="text-gray-600 mt-2">{collection.desc}</p>
             </div>
-
-            {/* Products */}
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
                 {filteredProducts.length > 0 ? (
                     filteredProducts.map((p) => (

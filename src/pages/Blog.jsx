@@ -1,65 +1,57 @@
-import { usePagination } from "../hooks/usePagination";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import { Navigation, Pagination } from "swiper/modules";
 import { useFetch } from "../hooks/useFetch";
 import { useFilter } from "../hooks/useFilter";
-import { useEffect } from "react";
 import CategoryFilter from "../components/CategoryFilter";
+import { useState } from "react";
 
-const Blog = ({ endpoint = "blog" }) => {
+export default function Blog({ endpoint = "blog" }) {
     const items = useFetch(`http://localhost:5000/${endpoint}`);
     const { category, setCategory, filteredItems } = useFilter(items);
-    const { currentPage, setCurrentPage, totalPages, visibleItems } = usePagination(filteredItems, 8);
-    useEffect(() => {
-        setCurrentPage(1);
-    }, [category, setCurrentPage]);
+    const [currentPage, setCurrentPage] = useState(1);
 
     return (
-        <div>
+        <div className="max-w-7xl mx-auto">
             <h1 className="text-2xl font-bold mb-4">Blog</h1>
             <CategoryFilter selected={category} onFilterChange={setCategory} />
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-                {visibleItems.map((item) => (
-                    <div key={item.id}>
-                        <img src={item.img} alt="" className="w-full h-64 object-cover rounded-lg" />
-                        <h3 className="mt-2 font-medium">{item.title}</h3>
-                        <p className="text-sm text-gray-500">{item.desc}</p>
-                    </div>
+
+            <Swiper
+                modules={[Navigation, Pagination]}
+                navigation
+                pagination={{
+                    clickable: true,
+                    renderBullet: (index, className) => {
+                        return `<span class="${className} px-2 py-1 rounded-full text-sm font-semibold bg-gray-200 dark:bg-gray-700 dark:text-white mx-1">${index + 1}</span>`;
+                    },
+                }}
+                onSlideChange={(swiper) => setCurrentPage(swiper.realIndex + 1)}
+                spaceBetween={20}
+                slidesPerView={1}
+                breakpoints={{
+                    640: { slidesPerView: 2 },
+                    1024: { slidesPerView: 4 },
+                }}
+                className="mySwiper mt-4 pb-10"
+            >
+                {filteredItems.map(({ id, img, title, desc }) => (
+                    <SwiperSlide key={id}>
+                        <div className="rounded-lg overflow-hidden shadow-md hover:shadow-xl transition">
+                            <img src={img} alt={title} className="w-full h-64 object-cover" />
+                            <div className="p-2">
+                                <h3 className="mt-2 font-medium">{title}</h3>
+                                <p className="text-sm text-gray-500">{desc}</p>
+                            </div>
+                        </div>
+                    </SwiperSlide>
                 ))}
-            </div>
-            <div className="flex justify-center items-center gap-2 mt-6">
-                <button
-                    disabled={currentPage === 1}
-                    onClick={() => setCurrentPage((prev) => prev - 1)}
-                    className={`w-8 h-8 flex items-center justify-center rounded-full transition 
-      ${currentPage === 1
-                            ? "text-gray-400 cursor-not-allowed"
-                            : "hover:bg-gray-200 dark:hover:bg-gray-700"}`}
-                >
-                    <i class="fa-solid fa-angle-left"></i>
-                </button>
-                {Array.from({ length: totalPages }, (_, i) => i + 1).map((num) => (
-                    <button
-                        key={num}
-                        onClick={() => setCurrentPage(num)}
-                        className={`w-8 h-8 rounded-full flex items-center justify-center transition 
-        ${currentPage === num
-                                ? "bg-gray-800 text-white dark:bg-gray-200 dark:text-black"
-                                : "hover:bg-gray-200 dark:hover:bg-gray-700"}`}
-                    >
-                        {num}
-                    </button>
-                ))}
-                <button
-                    disabled={currentPage === totalPages}
-                    onClick={() => setCurrentPage((prev) => prev + 1)}
-                    className={`w-8 h-8 flex items-center justify-center rounded-full transition 
-      ${currentPage === totalPages
-                            ? "text-gray-400 cursor-not-allowed"
-                            : "hover:bg-gray-200 dark:hover:bg-gray-700"}`}
-                >
-                    <i class="fa-solid fa-angle-right"></i>
-                </button>
-            </div>
+            </Swiper>
+
+            <p className="text-center mt-4 text-gray-600 dark:text-gray-300">
+                Page {currentPage} of {filteredItems.length}
+            </p>
         </div>
     );
-};
-export default Blog;
+}

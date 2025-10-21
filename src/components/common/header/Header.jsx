@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
-import { useSearchbehavior } from "../../../hooks/useSearchbehavior";
+import { useSearch } from "../../../hooks/useSearch";
 import Navbar from "./Navbar";
 import NavMenu from "./NavMenu";
 
@@ -10,7 +10,7 @@ export default function Header() {
     const [search, setSearch] = useState("");
     const inputRef = useRef(null);
     const wrapperRef = useRef(null);
-    useSearchbehavior(searchOpen, setSearchOpen, inputRef, wrapperRef);
+    useSearch(searchOpen, setSearchOpen, inputRef, wrapperRef);
     return (
         <header className="w-full bg-white shadow-sm">
             <div className="max-w-8xl mx-auto flex items-center justify-between px-3 md:px-6 py-3">

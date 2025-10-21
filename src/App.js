@@ -10,10 +10,13 @@ import ShoppingCart from "./pages/ShoppingCart";
 import CollectionPage from "./pages/CollectionPage.jsx";
 import Shop from "./pages/Shop.jsx";
 import Cart from "./pages/Cart.jsx";
-import MyWishlist from "./pages/Mywishlist";
-import Questions from "./pages/Questions";
-import NotFound from "./pages/Notfound";
+
+=========
+import Contact from "./pages/Contact.jsx";
+import ShoppingCart from "./pages/ShoppingCart";
+>>>>>>>>> Temporary merge branch 2
 function App() {
+  usePersistedUser();
   return (
     <div>
       <Header />
@@ -22,16 +25,12 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/shop" element={<Shop />} />
-          <Route path="/cart" element={<Cart />} />
           <Route path="/product/:id" element={<Product />} />
           <Route path="/collection/:id" element={<CollectionPage />} />
           <Route path="/about" element={<About />} />
           <Route path="/wishlist" element={<WishlistPage />} />
           <Route path="/contact" element={<Contact/>} />
           <Route path="/shoppingcart" element={<ShoppingCart/>} />
-          <Route path="/mywishlist" element={<MyWishlist/>} />
-          <Route path="/questions" element={<Questions/>} />
-          <Route path="/notfound" element={<NotFound/>} />
 
         </Routes>
       </div>

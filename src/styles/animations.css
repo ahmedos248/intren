@@ -1,0 +1,10 @@
+.collection-card {
+    opacity: 0;
+    transform: translateY(60px);
+    transition: all 0.7s ease-out;
+}
+
+.collection-card.show {
+    opacity: 1;
+    transform: translateY(0);
+}

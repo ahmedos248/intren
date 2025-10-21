@@ -1,5 +1,5 @@
 import React from 'react';
-import { Mail, Phone, MapPin } from 'lucide-react'; // تحتاج لتثبيت مكتبة الأيقونات lucide-react
+// import { Mail, Phone, MapPin } from 'lucide-react'; // تحتاج لتثبيت مكتبة الأيقونات lucide-react
 
 // **********************************************
 // ملاحظة: لضمان عمل الأيقونات، قم بتثبيت lucide-react:
@@ -38,10 +38,10 @@ const ContactUsPage = () => {
                 {/* Contact Form and Details Layout */}
                 <div className="bg-white p-6 sm:p-10 rounded-lg shadow-xl">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-                        
+
                         {/* Contact Form (النموذج) */}
                         <form onSubmit={handleSubmit} className="space-y-6">
-                            
+
                             {/* Name Input */}
                             <div>
                                 <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
@@ -89,7 +89,7 @@ const ContactUsPage = () => {
                                 Submit
                             </button>
                         </form>
-                        
+
                         {/* Placeholder for potential additional content (like the image in the original design if it was on the side) */}
                         <div className="hidden lg:block">
                             {/* يمكن استخدام هذه المساحة لمعلومات إضافية أو صورة إن أردت */}
@@ -100,8 +100,8 @@ const ContactUsPage = () => {
                     <div className="mt-10">
                         {/* The map iframe is set to be responsive (w-full) and has a fixed height */}
                         <iframe
-                       src="https://maps.google.com/maps?q=Cairo&t=&z=13&ie=UTF8&iwloc=&output=embed" 
-                        width="100%"
+                            src="https://maps.google.com/maps?q=Cairo&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                            width="100%"
                             height="400"
                             style={{ border: 0 }}
                             allowFullScreen=""
@@ -117,12 +117,12 @@ const ContactUsPage = () => {
                         <p className="text-base text-gray-700 mb-4">
                             *Visit us at our store or connect with us online.* We're always happy to assist you.
                         </p>
-                        
+
                         <div className="space-y-4">
-                            
+
                             {/* Address */}
                             <div className="flex items-start text-gray-600">
-                                <MapPin className="h-5 w-5 mr-3 flex-shrink-0 text-gray-500 mt-0.5" />
+                                {/* <MapPin className="h-5 w-5 mr-3 flex-shrink-0 text-gray-500 mt-0.5" /> */}
                                 <div>
                                     <p className="font-semibold text-gray-800">123 Market Avenue</p>
                                     <p>San Francisco, CA 94102</p>
@@ -131,7 +131,7 @@ const ContactUsPage = () => {
 
                             {/* Phone */}
                             <div className="flex items-center text-gray-600">
-                                <Phone className="h-5 w-5 mr-3 flex-shrink-0 text-gray-500" />
+                                {/* <Phone className="h-5 w-5 mr-3 flex-shrink-0 text-gray-500" /> */}
                                 <a href="tel:1-555-123-4567" className="hover:text-gray-900 transition">
                                     (555) 123-4567
                                 </a>
@@ -139,7 +139,7 @@ const ContactUsPage = () => {
 
                             {/* Email (Optional, based on image) */}
                             <div className="flex items-center text-gray-600">
-                                <Mail className="h-5 w-5 mr-3 flex-shrink-0 text-gray-500" />
+                                {/* <Mail className="h-5 w-5 mr-3 flex-shrink-0 text-gray-500" /> */}
                                 <a href="mailto:info@stylehub.com" className="hover:text-gray-900 transition">
                                     info@stylehub.com
                                 </a>
@@ -166,4 +166,4 @@ const ContactUsPage = () => {
     );
 };
 
-export default ContactUsPage;
+export default ContactUsPage;

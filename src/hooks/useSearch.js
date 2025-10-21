@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-export function useSearchbehavior(searchOpen, setSearchOpen, inputRef, wrapperRef) {
+export function useSearch(searchOpen, setSearchOpen, inputRef, wrapperRef) {
     useEffect(() => {
         if (searchOpen) inputRef.current?.focus();
     }, [searchOpen, inputRef]);
