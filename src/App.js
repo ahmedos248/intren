@@ -1,22 +1,16 @@
 import { Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
+import Home from "./pages/Home.jsx";
 import Blog from "./pages/Blog.jsx";
 import Header from "./components/common/header/Header.jsx";
 import Product from "./pages/Product.jsx"
 import About from "./pages/About.jsx";
 import WishlistPage from "./pages/WishlistPage.jsx";
 import Contact from "./pages/Contact.jsx";
-import ShoppingCart from "./pages/ShoppingCart";
+import ShoppingCart from "./pages/ShoppingCart.jsx";
 import CollectionPage from "./pages/CollectionPage.jsx";
 import Shop from "./pages/Shop.jsx";
-import Cart from "./pages/Cart.jsx";
 
-=========
-import Contact from "./pages/Contact.jsx";
-import ShoppingCart from "./pages/ShoppingCart";
->>>>>>>>> Temporary merge branch 2
 function App() {
-  usePersistedUser();
   return (
     <div>
       <Header />

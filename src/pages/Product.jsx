@@ -19,7 +19,7 @@ export default function Product() {
   const { product, status } = useSelector((s) => s.products);
 
   useEffect(() => {
-    dispatch(fetchProductById(Number(id)));
+    dispatch(fetchProductById(id));
   }, [dispatch, id]);
   if (status === "loading") return <p>Loading...</p>;
   if (!product) return <p>Product not found</p>;
