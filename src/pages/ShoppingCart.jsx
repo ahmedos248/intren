@@ -1,11 +1,11 @@
-import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { decreaseQuantity, increaseQuantity } from "../store/cartSlice";
+import { useCart } from "../hooks/useCart";
 
 const ShoppingCart = () => {
-  const cartItems = useSelector((state) => state.cart.products);
-  const dispatch = useDispatch();
+  const { cart, increaseQuantity, decreaseQuantity } = useCart();
+  const cartItems = cart.products;
+
   const subtotal = cartItems.reduce(
     (acc, item) => acc + item.price * item.quantity,
     0
@@ -23,11 +23,6 @@ const ShoppingCart = () => {
       {
         position: "top-center",
         autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
       }
     );
   };
@@ -61,14 +56,14 @@ const ShoppingCart = () => {
                 <div className="flex items-center gap-4">
                   <div className="flex items-center border rounded-lg">
                     <button
-                      onClick={() => dispatch(decreaseQuantity(item.id))}
+                      onClick={() => decreaseQuantity(item.id)}
                       className="px-3 py-1 text-lg"
                     >
                       -
                     </button>
                     <span className="px-3">{item.quantity}</span>
                     <button
-                      onClick={() => dispatch(increaseQuantity(item.id))}
+                      onClick={() => increaseQuantity(item.id)}
                       className="px-3 py-1 text-lg"
                     >
                       +

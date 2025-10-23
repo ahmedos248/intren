@@ -12,8 +12,10 @@ import Shop from "./pages/Shop.jsx";
 import Admin from "./pages/Admin.jsx";
 import AdminRoute from "./components/admin/AdminRoute.jsx";
 import Login from "./pages/Login.jsx";
+import { usePersistedUser } from "./hooks/usePersistedUser.js";
 
 function App() {
+  usePersistedUser();
   return (
     <div>
       <Header />
