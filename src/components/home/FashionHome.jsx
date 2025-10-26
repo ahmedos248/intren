@@ -26,9 +26,12 @@ const Section = ({ title, type }) => {
     const { newArrivals, bestSellers, status } = useSelector((s) => s.products);
 
     useEffect(() => {
-        dispatch(fetchProducts());
+        if (status === "idle") {
+            dispatch(fetchProducts());
+        }
         Aos.refresh();
-    }, [dispatch]);
+    }, [dispatch, status]);
+
 
     if (status === "loading") return <p>Loading...</p>;
 
