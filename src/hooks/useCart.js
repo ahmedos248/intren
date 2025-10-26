@@ -25,7 +25,7 @@ export const useCart = () => {
         if (cart.userId) {
             dispatch(saveUserCart({ userEmail: cart.userId, cart }));
         }
-    }, [cart.products, cart.totalQuantity, cart.totalPrice, cart.userId, dispatch]);
+    }, [cart, dispatch]);
 
     const addToCart = (product) => dispatch(addToCartAction(product));
     const removeFromCart = (productId) => dispatch(removeFromCartAction(productId));

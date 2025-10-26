@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setSearchTerm } from "../../../store/searchSlice";
 import useProfileImage from "../../../hooks/useProfileImage";
+import { signOut } from "firebase/auth";
+import { auth } from "../../../firebase";
 
 export default function Navbar({ searchOpen, setSearchOpen, menuOpen, setMenuOpen, wrapperRef }) {
     const dispatch = useDispatch();
@@ -42,8 +44,17 @@ export default function Navbar({ searchOpen, setSearchOpen, menuOpen, setMenuOpe
                         className="absolute inset-0 bg-black/50 text-white text-xs flex items-center justify-center rounded-full opacity-0 group-hover:opacity-100 transition cursor-pointer">Change</label>
                     <input id="profile-upload" type="file" accept="image/*"
                         onChange={e => updateProfileImage(e.target.files[0])} className="hidden" />
-                    <button onClick={() => { localStorage.removeItem("user"); window.location.reload(); }}
-                        className="absolute top-full mt-2 left-1/2 -translate-x-1/2 bg-red-500 text-white text-sm px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 hidden lg:block">
+                    <button
+                        onClick={() => {
+                            signOut(auth)
+                                .then(() => {
+                                    localStorage.removeItem("user");
+                                    window.location.reload();
+                                })
+                                .catch(console.error);
+                        }}
+                        className="absolute top-full mt-2 left-1/2 -translate-x-1/2 bg-red-500 text-white text-sm px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 hidden lg:block"
+                    >
                         Logout
                     </button>
                 </div>

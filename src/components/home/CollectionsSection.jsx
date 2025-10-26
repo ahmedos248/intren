@@ -2,6 +2,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchCollections, fetchProducts } from "../../store/productsSlice";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const CollectionsSection = () => {
     const dispatch = useDispatch();
@@ -10,6 +12,7 @@ const CollectionsSection = () => {
     useEffect(() => {
         dispatch(fetchCollections());
         dispatch(fetchProducts());
+        AOS.refresh();
     }, [dispatch]);
 
     if (status === "loading") return <p>Loading...</p>;
@@ -22,6 +25,7 @@ const CollectionsSection = () => {
                     <Link
                         to={`/collection/${col.id}`}
                         key={col.id}
+                        data-aos="fade-up"
                         className="p-4 border rounded-lg hover:shadow-lg transition"
                     >
                         {Array.isArray(col.images) && col.images.length > 0 && (

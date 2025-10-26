@@ -1,75 +1,91 @@
-import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { login } from "../store/userSlice";
 import { useNavigate } from "react-router-dom";
-import { loadUserCart, setUserId } from "../store/cartSlice"; // add setUserId
+import { loadUserCart, setUserId } from "../store/cartSlice";
+import { auth } from "../firebase";
+import {
+    signInWithEmailAndPassword,
+    createUserWithEmailAndPassword,
+    updateProfile,
+} from "firebase/auth";
 
 const useLogin = () => {
-    const [users, setUsers] = useState([]);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    useEffect(() => {
-        fetch("http://localhost:5000/users")
-            .then((res) => res.json())
-            .then((data) => setUsers(data || []))
-            .catch((err) => console.error("Error loading users:", err));
-    }, []);
-
-    const saveLightUser = (fullUser) => {
-        const { image, ...light } = fullUser;
-        localStorage.setItem("user", JSON.stringify(light));
-        dispatch(login(fullUser));
+    const saveLightUser = (user) => {
+        const lightUser = {
+            uid: user.uid,
+            email: user.email,
+            name: user.displayName,
+            image: user.photoURL,
+            isAdmin: false,
+        };
+        localStorage.setItem("user", JSON.stringify(lightUser));
+        dispatch(login(lightUser));
     };
 
-    const handleLogin = (email, password) => {
-        const foundUser = users.find(
-            (u) => u.email === email && u.password === password
-        );
+    const handleLogin = async (email, password) => {
+        try {
+            const userCredential = await signInWithEmailAndPassword(auth, email, password);
+            const firebaseUser = userCredential.user;
 
-        if (foundUser) {
-            console.log("✅ Logged in as:", foundUser);
-            saveLightUser(foundUser);
-            dispatch(setUserId(foundUser.email)); // ← important
-            dispatch(loadUserCart(foundUser.email)); // load cart
-            navigate(foundUser.isAdmin ? "/admin" : "/");
-        } else {
-            alert("Invalid email or password");
+            // ✅ Fetch extra data from db.json
+            const res = await fetch(`http://localhost:5000/users?email=${firebaseUser.email}`);
+            const users = await res.json();
+            const dbUser = users[0];
+
+            const mergedUser = dbUser
+                ? { ...dbUser, uid: firebaseUser.uid }
+                : {
+                    uid: firebaseUser.uid,
+                    email: firebaseUser.email,
+                    name: firebaseUser.displayName,
+                    image: firebaseUser.photoURL || "/images/avatar.jpg",
+                    isAdmin: false,
+                };
+
+            // Save locally + redux
+            localStorage.setItem("user", JSON.stringify(mergedUser));
+            dispatch(login(mergedUser));
+            dispatch(setUserId(mergedUser.email));
+            dispatch(loadUserCart(mergedUser.email));
+            navigate("/");
+        } catch (error) {
+            alert("❌ Invalid email or password");
+            console.error(error);
         }
     };
 
-    const handleRegister = async (name, email, password) => {
-        const existing = users.find((u) => u.email === email);
-        if (existing) return alert("Email already exists!");
-
-        const newUser = {
-            email,
-            password,
-            name,
-            isAdmin: false,
-            image: "",
-            cart: { products: [], totalQuantity: 0, totalPrice: 0 },
-        };
-
+    const handleRegister = async (name, email, password, image) => {
         try {
-            const res = await fetch("http://localhost:5000/users", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(newUser),
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            const user = userCredential.user;
+
+            await updateProfile(user, {
+                displayName: name,
+                photoURL: image || "/images/avatar.jpg",
             });
 
-            if (!res.ok) throw new Error("Failed to register user");
+            // ✅ Also add new user to db.json
+            await fetch("http://localhost:5000/users", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    email,
+                    name,
+                    image: image || "/images/avatar.jpg",
+                    isAdmin: false,
+                }),
+            });
 
-            const data = await res.json(); // json-server assigns the ID
-            console.log("✅ Registered user:", data);
-
-            setUsers((prev) => [...prev, data]);
-            saveLightUser(data);
-            dispatch(setUserId(data.email)); // ← important
-            dispatch(loadUserCart(data.email)); // load empty cart
+            saveLightUser(user);
+            dispatch(setUserId(user.email));
+            dispatch(loadUserCart(user.email));
             navigate("/");
-        } catch (err) {
-            console.error("❌ Register error:", err);
+        } catch (error) {
+            alert(error.code + ": " + error.message);
+            console.error(error);
         }
     };
 

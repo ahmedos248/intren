@@ -1,17 +1,12 @@
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../../../store/userSlice";
+import { useSelector } from "react-redux";
 import useProfileImage from "../../../hooks/useProfileImage";
+import { signOut } from "firebase/auth";
+import { auth } from "../../../firebase";
 
 export default function NavMenu({ isOpen, onClose }) {
-    const dispatch = useDispatch();
     const user = useSelector((s) => s.user.user);
     const { updateProfileImage } = useProfileImage();
-
-    const handleLogout = () => {
-        dispatch(logout());
-        localStorage.removeItem("user");
-    };
 
     return (
         <>
@@ -36,7 +31,14 @@ export default function NavMenu({ isOpen, onClose }) {
                                 <input id="profile-upload" type="file" accept="image/*" onChange={(e) => updateProfileImage(e.target.files[0])} className="hidden" />
                             </div>
                             <span className="text-sm text-white">{user.name}</span>
-                            <button onClick={handleLogout} className="px-4 py-2 bg-red-500 text-white rounded-xl text-sm font-medium hover:bg-red-600 transition">Logout</button>
+                            <button onClick={() => {
+                                signOut(auth)
+                                    .then(() => {
+                                        localStorage.removeItem("user");
+                                        window.location.reload();
+                                    })
+                                    .catch(console.error);
+                            }} className="px-4 py-2 bg-red-500 text-white rounded-xl text-sm font-medium hover:bg-red-600 transition">Logout</button>
                         </div>
                     )}
                 </div>

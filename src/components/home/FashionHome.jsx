@@ -4,11 +4,13 @@ import { fetchProducts } from "../../store/productsSlice";
 import BlogSection from "./BlogSection";
 import { Link } from "react-router-dom";
 import CollectionsSection from "./CollectionsSection";
+import Aos from "aos";
 
 const Card = ({ id, images, title }) => (
     <Link
         to={`/product/${id}`}
         className="p-4 border rounded-lg hover:shadow-lg transition"
+        data-aos="fade-up"
     >
         <img
             src={images && images.length > 0 ? images[0] : "/placeholder.jpg"}
@@ -19,13 +21,13 @@ const Card = ({ id, images, title }) => (
     </Link>
 );
 
-
 const Section = ({ title, type }) => {
     const dispatch = useDispatch();
     const { newArrivals, bestSellers, status } = useSelector((s) => s.products);
 
     useEffect(() => {
         dispatch(fetchProducts());
+        Aos.refresh();
     }, [dispatch]);
 
     if (status === "loading") return <p>Loading...</p>;
@@ -33,7 +35,7 @@ const Section = ({ title, type }) => {
     const products = type === "new" ? newArrivals : bestSellers;
 
     return (
-        <section>
+        <section data-aos="fade-up">
             <h2 className="text-xl font-semibold mb-4">{title}</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
                 {products.map((p) => (
@@ -45,6 +47,10 @@ const Section = ({ title, type }) => {
 };
 
 export default function FashionHome() {
+    useEffect(() => {
+        Aos.init({ duration: 800, once: true });
+    }, []);
+
     return (
         <div className="w-full py-10 space-y-12">
             <Section title="New Arrivals" type="new" />
