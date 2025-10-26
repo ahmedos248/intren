@@ -1,21 +1,16 @@
 import { Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
+import Home from "./pages/Home.jsx";
 import Blog from "./pages/Blog.jsx";
 import Header from "./components/common/header/Header.jsx";
 import Product from "./pages/Product.jsx"
 import About from "./pages/About.jsx";
 import WishlistPage from "./pages/WishlistPage.jsx";
 import Contact from "./pages/Contact.jsx";
-import ShoppingCart from "./pages/ShoppingCart";
+import ShoppingCart from "./pages/ShoppingCart.jsx";
 import CollectionPage from "./pages/CollectionPage.jsx";
 import Shop from "./pages/Shop.jsx";
-import Admin from "./pages/Admin.jsx";
-import AdminRoute from "./components/admin/AdminRoute.jsx";
-import Login from "./pages/Login.jsx";
-import { usePersistedUser } from "./hooks/usePersistedUser.js";
 
 function App() {
-  usePersistedUser();
   return (
     <div>
       <Header />
@@ -28,17 +23,9 @@ function App() {
           <Route path="/collection/:id" element={<CollectionPage />} />
           <Route path="/about" element={<About />} />
           <Route path="/wishlist" element={<WishlistPage />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/shoppingcart" element={<ShoppingCart />} />
-          <Route path="/login" element={<Login />} />
-          <Route
-            path="/admin"
-            element={
-              <AdminRoute>
-                <Admin />
-              </AdminRoute>
-            }
-          />
+          <Route path="/contact" element={<Contact/>} />
+          <Route path="/shoppingcart" element={<ShoppingCart/>} />
+
         </Routes>
       </div>
     </div>
