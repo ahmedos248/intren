@@ -1,15 +1,14 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../store/productsSlice";
 import Products from "../components/shop/Products";
+import { useFilteredProducts } from "../hooks/useFilteredProducts";
 
 const Shop = () => {
     const dispatch = useDispatch();
-    const { items, status, error } = useSelector((state) => state.products);
-    const searchTerm = useSelector((state) => state.search.term);
+    const { status, error } = useSelector((state) => state.products);
 
     const [filters, setFilters] = useState({
-        title: "",
         category: "",
         minPrice: "",
         maxPrice: "",
@@ -17,36 +16,17 @@ const Shop = () => {
 
     // Fetch products only once
     useEffect(() => {
-        if (status === "idle") dispatch(fetchProducts());
+        if (status === "idle") {
+            dispatch(fetchProducts());
+        }
     }, [dispatch, status]);
 
-    // Memoized categories to avoid recalculation
-    const categories = useMemo(
-        () => [...new Set(items.map((p) => p.category))],
-        [items]
-    );
-
-    // Memoized filtered products
-    const filteredProducts = useMemo(() => {
-        return items.filter((product) => {
-            const matchesTitle = product.title
-                .toLowerCase()
-                .includes(searchTerm.toLowerCase());
-
-            const matchesCategory = filters.category
-                ? product.category === filters.category
-                : true;
-
-            const matchesPrice =
-                (!filters.minPrice || product.price >= parseFloat(filters.minPrice)) &&
-                (!filters.maxPrice || product.price <= parseFloat(filters.maxPrice));
-
-            return matchesTitle && matchesCategory && matchesPrice;
-        });
-    }, [items, searchTerm, filters]);
+    // Use custom hook for filtering
+    const { filteredProducts, categories } = useFilteredProducts(filters);
 
     if (status === "loading")
         return <div className="text-center mt-20">Loading...</div>;
+
     if (status === "failed")
         return (
             <div className="text-center mt-20 text-red-500">{error}</div>

@@ -1,28 +1,30 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const API = process.env.NODE_ENV === "production" ? "" : "http://localhost:3000";
+const API =
+    process.env.REACT_APP_USE_JSON_SERVER === "true"
+        ? "http://localhost:5000"
+        : "";
 
 // Fetch all products
 export const fetchProducts = createAsyncThunk(
     "products/fetchProducts",
     async () => {
-        const res = await axios.get(`${API}/api/products`);
+        const res = await axios.get(`${API}/products`); // <-- fixed
         return res.data;
     }
 );
 
 // Fetch single product + its reviews
-// Fetch single product + its reviews
 export const fetchProductById = createAsyncThunk(
     "products/fetchProductById",
     async (id) => {
         const [productRes, reviewsRes] = await Promise.all([
-            axios.get(`${API}/api/products?id=${id}`),
-            axios.get(`${API}/api/reviews?productId=${id}`)
+            axios.get(`${API}/products/${id}`), // <-- fixed
+            axios.get(`${API}/reviews?productId=${id}`),
         ]);
 
-        const product = productRes.data[0]; // <-- get the first match
+        const product = productRes.data;
         if (!product) throw new Error("Product not found");
 
         return {
@@ -32,13 +34,11 @@ export const fetchProductById = createAsyncThunk(
     }
 );
 
-
-
 // Fetch all collections
 export const fetchCollections = createAsyncThunk(
     "products/fetchCollections",
     async () => {
-        const res = await axios.get(`${API}/api/collections`);
+        const res = await axios.get(`${API}/collections`);
         return res.data;
     }
 );
@@ -47,7 +47,7 @@ export const fetchCollections = createAsyncThunk(
 export const fetchBlogs = createAsyncThunk(
     "products/fetchBlogs",
     async () => {
-        const res = await axios.get(`${API}/api/blog`);
+        const res = await axios.get(`${API}/blog`);
         return res.data;
     }
 );
@@ -80,7 +80,6 @@ const productsSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            // 🔹 Fetch all products
             .addCase(fetchProducts.pending, (state) => {
                 state.status = "loading";
             })
@@ -95,7 +94,6 @@ const productsSlice = createSlice({
                 state.error = action.error.message;
             })
 
-            // 🔹 Fetch single product by ID
             .addCase(fetchProductById.pending, (state) => {
                 state.status = "loading";
             })
@@ -108,7 +106,6 @@ const productsSlice = createSlice({
                 state.error = action.error.message;
             })
 
-            // 🔹 Fetch collections
             .addCase(fetchCollections.pending, (state) => {
                 state.status = "loading";
             })
@@ -123,7 +120,6 @@ const productsSlice = createSlice({
                 state.error = action.error.message;
             })
 
-            // 🔹 Fetch blog posts
             .addCase(fetchBlogs.pending, (state) => {
                 state.status = "loading";
             })

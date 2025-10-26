@@ -9,6 +9,7 @@ import Contact from "./pages/Contact.jsx";
 import ShoppingCart from "./pages/ShoppingCart.jsx";
 import CollectionPage from "./pages/CollectionPage.jsx";
 import Shop from "./pages/Shop.jsx";
+import Login from "./pages/Login.jsx";
 
 function App() {
   return (
@@ -23,9 +24,9 @@ function App() {
           <Route path="/collection/:id" element={<CollectionPage />} />
           <Route path="/about" element={<About />} />
           <Route path="/wishlist" element={<WishlistPage />} />
-          <Route path="/contact" element={<Contact/>} />
-          <Route path="/shoppingcart" element={<ShoppingCart/>} />
-
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/shoppingcart" element={<ShoppingCart />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </div>
     </div>
