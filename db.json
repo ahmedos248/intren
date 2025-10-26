@@ -323,6 +323,13 @@
         "totalPrice": 1550,
         "userId": "hikalahmed10@gmail.com"
       }
+    },
+    {
+      "id": "1761511898578",
+      "email": "hahmed10@gmail.com",
+      "name": "ahmed2",
+      "image": "/images/avatar.jpg",
+      "isAdmin": false
     }
   ]
 }

@@ -68,16 +68,16 @@ const useLogin = () => {
             });
 
             // ✅ Also add new user to db.json
-            await fetch("http://localhost:5000/users", {
+            await fetch("http://localhost:3000/api/users", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     email,
                     name,
                     image: image || "/images/avatar.jpg",
-                    isAdmin: false,
                 }),
             });
+
 
             saveLightUser(user);
             dispatch(setUserId(user.email));
