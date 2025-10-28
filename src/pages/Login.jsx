@@ -5,6 +5,7 @@ const Login = () => {
     const [isRegister, setIsRegister] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
     const [name, setName] = useState("");
     const [image, setImage] = useState("");
     const { handleLogin, handleRegister } = useLogin();
@@ -17,10 +18,7 @@ const Login = () => {
 
     return (
         <div className="flex flex-col items-center justify-center h-screen bg-gray-50">
-            <form
-                onSubmit={onSubmit}
-                className="bg-white shadow-md rounded-xl p-8 w-80"
-            >
+            <form onSubmit={onSubmit} className="bg-white shadow-md rounded-xl p-8 w-80">
                 <h2 className="text-2xl font-semibold mb-6 text-center text-gray-800">
                     {isRegister ? "Register" : "Login"}
                 </h2>
@@ -44,14 +42,23 @@ const Login = () => {
                     onChange={(e) => setEmail(e.target.value)}
                     required
                 />
-                <input
-                    type="password"
-                    placeholder="Password"
-                    className="w-full border rounded-lg px-3 py-2 mb-4"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                />
+
+                <div className="relative mb-4">
+                    <input
+                        type={showPassword ? "text" : "password"}
+                        placeholder="Password"
+                        className="w-full border rounded-lg px-3 py-2"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                    />
+                    <span
+                        onClick={() => setShowPassword(!showPassword)}
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer"
+                    >
+                        <i className={showPassword ? "fa fa-eye-slash" : "fa fa-eye"}></i>
+                    </span>
+                </div>
 
                 <button
                     type="submit"

@@ -10,6 +10,8 @@ import ShoppingCart from "./pages/ShoppingCart.jsx";
 import CollectionPage from "./pages/CollectionPage.jsx";
 import Shop from "./pages/Shop.jsx";
 import Login from "./pages/Login.jsx";
+import New from "./pages/New.jsx";
+import Sale from "./pages/Sale.jsx";
 
 function App() {
   return (
@@ -27,6 +29,8 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/shoppingcart" element={<ShoppingCart />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/newarrivals" element={<New />} />
+          <Route path="/sale" element={<Sale />} />
         </Routes>
       </div>
     </div>

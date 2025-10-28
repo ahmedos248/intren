@@ -1,9 +1,15 @@
-import { useMemo } from "react";
+import { useState, useMemo } from "react";
 import { useSelector } from "react-redux";
 
-export const useFilteredProducts = (filters) => {
+export const useFilteredProducts = () => {
     const { items } = useSelector((state) => state.products);
     const searchTerm = useSelector((state) => state.search.term);
+
+    const [filters, setFilters] = useState({
+        minPrice: "",
+        maxPrice: "",
+        category: "",
+    });
 
     const filteredProducts = useMemo(() => {
         return items.filter((product) => {
@@ -28,5 +34,5 @@ export const useFilteredProducts = (filters) => {
         [items]
     );
 
-    return { filteredProducts, categories };
+    return { filters, setFilters, filteredProducts, categories };
 };

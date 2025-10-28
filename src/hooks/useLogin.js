@@ -9,29 +9,35 @@ import {
     updateProfile,
 } from "firebase/auth";
 
+const API_URL = process.env.REACT_APP_JSON_SERVER || "http://localhost:5000";
+
 const useLogin = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const saveLightUser = (user) => {
-        const lightUser = {
-            uid: user.uid,
-            email: user.email,
-            name: user.displayName,
-            image: user.photoURL,
-            isAdmin: false,
-        };
-        localStorage.setItem("user", JSON.stringify(lightUser));
-        dispatch(login(lightUser));
+    const saveUser = (user) => {
+        localStorage.setItem("user", JSON.stringify(user));
+        dispatch(login(user));
+        dispatch(setUserId(user.email));
+        dispatch(loadUserCart(user.email));
     };
 
     const handleLogin = async (email, password) => {
         try {
-            const userCredential = await signInWithEmailAndPassword(auth, email, password);
+            // Trim inputs
+            const trimmedEmail = email.trim();
+            const trimmedPassword = password.trim();
+
+            // 1️⃣ Authenticate with Firebase
+            const userCredential = await signInWithEmailAndPassword(
+                auth,
+                trimmedEmail,
+                trimmedPassword
+            );
             const firebaseUser = userCredential.user;
 
-            // ✅ Fetch extra data from db.json
-            const res = await fetch(`http://localhost:5000/users?email=${firebaseUser.email}`);
+            // 2️⃣ Fetch user data from JSON Server
+            const res = await fetch(`${API_URL}/users?email=${firebaseUser.email}`);
             const users = await res.json();
             const dbUser = users[0];
 
@@ -40,52 +46,59 @@ const useLogin = () => {
                 : {
                     uid: firebaseUser.uid,
                     email: firebaseUser.email,
-                    name: firebaseUser.displayName,
-                    image: firebaseUser.photoURL || "/images/avatar.jpg",
+                    name: firebaseUser.displayName || "",
+                    image: "/images/avatar.jpg",
                     isAdmin: false,
                 };
 
-            // Save locally + redux
-            localStorage.setItem("user", JSON.stringify(mergedUser));
-            dispatch(login(mergedUser));
-            dispatch(setUserId(mergedUser.email));
-            dispatch(loadUserCart(mergedUser.email));
+            // 3️⃣ Save locally + Redux
+            saveUser(mergedUser);
             navigate("/");
         } catch (error) {
-            alert("❌ Invalid email or password");
-            console.error(error);
+            console.error("Login error:", error.code, error.message);
+            alert(`❌ ${error.code}: ${error.message}`);
         }
     };
 
     const handleRegister = async (name, email, password, image) => {
         try {
-            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-            const user = userCredential.user;
+            const trimmedEmail = email.trim();
+            const trimmedPassword = password.trim();
+            const trimmedName = name.trim();
 
-            await updateProfile(user, {
-                displayName: name,
+            // 1️⃣ Create Firebase account
+            const userCredential = await createUserWithEmailAndPassword(
+                auth,
+                trimmedEmail,
+                trimmedPassword
+            );
+            const firebaseUser = userCredential.user;
+
+            await updateProfile(firebaseUser, {
+                displayName: trimmedName,
                 photoURL: image || "/images/avatar.jpg",
             });
 
-            // ✅ Also add new user to db.json
-            await fetch("http://localhost:3000/api/users", {
+            // 2️⃣ Add user to JSON Server
+            const newUser = {
+                email: trimmedEmail,
+                name: trimmedName,
+                image: image || "/images/avatar.jpg",
+                isAdmin: false,
+            };
+
+            await fetch(`${API_URL}/users`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    email,
-                    name,
-                    image: image || "/images/avatar.jpg",
-                }),
+                body: JSON.stringify(newUser),
             });
 
-
-            saveLightUser(user);
-            dispatch(setUserId(user.email));
-            dispatch(loadUserCart(user.email));
+            // 3️⃣ Save locally + Redux
+            saveUser({ ...newUser, uid: firebaseUser.uid });
             navigate("/");
         } catch (error) {
-            alert(error.code + ": " + error.message);
-            console.error(error);
+            console.error("Register error:", error.code, error.message);
+            alert(`❌ ${error.code}: ${error.message}`);
         }
     };
 

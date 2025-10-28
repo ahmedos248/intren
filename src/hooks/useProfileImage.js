@@ -1,6 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../store/userSlice";
 
+const API_URL = process.env.REACT_APP_JSON_SERVER || "http://localhost:5000";
+
 const useProfileImage = () => {
     const dispatch = useDispatch();
     const user = useSelector((state) => state.user.user);
@@ -18,16 +20,16 @@ const useProfileImage = () => {
 
             try {
                 console.log("🟡 Uploading image for user:", user.email);
-
-                // Find user by email
-                const res = await fetch(`http://localhost:5000/users?email=${user.email}`);
+                const res = await fetch(`${API_URL}/users?email=${user.email}`);
                 const users = await res.json();
+
                 if (!users.length) throw new Error("User not found in db.json");
+
                 const foundUser = users[0];
 
-                // Update user with new image
+                // Update user image
                 const updatedUser = { ...foundUser, image: newImage };
-                const updateRes = await fetch(`http://localhost:5000/users/${foundUser.id}`, {
+                const updateRes = await fetch(`${API_URL}/users/${foundUser.id}`, {
                     method: "PUT",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(updatedUser),

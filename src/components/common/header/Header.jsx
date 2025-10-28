@@ -25,7 +25,7 @@ export default function Header() {
                 <nav className="hidden lg:flex space-x-12 font-medium text-gray-700 text-lg">
                     <Link to="/">Home</Link>
                     <Link to="/shop">Shop</Link>
-                    <Link to="/new">New Arrivals</Link>
+                    <Link to="/newarrivals">New Arrivals</Link>
                     <Link to="/sale">Sale</Link>
                     <Link to="/blog">Blog</Link>
                     <Link to="/contact">Contact</Link>

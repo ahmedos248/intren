@@ -1,63 +1,29 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchProducts } from "../../store/productsSlice";
 import BlogSection from "./BlogSection";
-import { Link } from "react-router-dom";
 import CollectionsSection from "./CollectionsSection";
 import Aos from "aos";
+import Section from "../Section";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProducts } from "../../store/productsSlice";
 
-const Card = ({ id, images, title }) => (
-    <Link
-        to={`/product/${id}`}
-        className="p-4 border rounded-lg hover:shadow-lg transition"
-        data-aos="fade-up"
-    >
-        <img
-            src={images && images.length > 0 ? images[0] : "/placeholder.jpg"}
-            alt={title}
-            className="w-full h-48 object-cover rounded-lg"
-        />
-        <h3 className="font-medium mt-2">{title}</h3>
-    </Link>
-);
 
-const Section = ({ title, type }) => {
+
+
+export default function FashionHome() {
     const dispatch = useDispatch();
-    const { newArrivals, bestSellers, status } = useSelector((s) => s.products);
+    const { newArrivals = [], bestSellers = [], status } = useSelector((s) => s.products);
 
     useEffect(() => {
+        Aos.init({ duration: 800, once: true });
         if (status === "idle") {
             dispatch(fetchProducts());
         }
-        Aos.refresh();
     }, [dispatch, status]);
-
-
-    if (status === "loading") return <p>Loading...</p>;
-
-    const products = type === "new" ? newArrivals : bestSellers;
-
-    return (
-        <section data-aos="fade-up">
-            <h2 className="text-xl font-semibold mb-4">{title}</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-                {products.map((p) => (
-                    <Card key={p.id} {...p} />
-                ))}
-            </div>
-        </section>
-    );
-};
-
-export default function FashionHome() {
-    useEffect(() => {
-        Aos.init({ duration: 800, once: true });
-    }, []);
 
     return (
         <div className="w-full py-10 space-y-12">
-            <Section title="New Arrivals" type="new" />
-            <Section title="Best Sellers" type="best" />
+            <Section title="New Arrivals" type="new" products={newArrivals.slice(0, 4)} />
+            <Section title="Best Sellers" type="best" products={bestSellers.slice(0, 4)} />
             <CollectionsSection />
             <BlogSection />
         </div>
